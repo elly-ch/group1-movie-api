@@ -1,4 +1,4 @@
-package sg.edu.ntu.simplecrm.controllers;
+package sg.edu.ntu.movie_api.controllers;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -12,7 +12,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import sg.edu.ntu.simplecrm.entities.Customer;
+import sg.edu.ntu.movie_api.entities.Customer;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 

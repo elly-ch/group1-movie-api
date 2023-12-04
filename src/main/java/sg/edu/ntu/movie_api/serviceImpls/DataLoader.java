@@ -1,11 +1,11 @@
-package sg.edu.ntu.simplecrm.serviceImpls;
+package sg.edu.ntu.movie_api.serviceImpls;
 
 import javax.annotation.PostConstruct;
 
 import org.springframework.stereotype.Component;
 
-import sg.edu.ntu.simplecrm.entities.Customer;
-import sg.edu.ntu.simplecrm.repositories.CustomerRepository;
+import sg.edu.ntu.movie_api.entities.Customer;
+import sg.edu.ntu.movie_api.repositories.CustomerRepository;
 
 @Component
 public class DataLoader {

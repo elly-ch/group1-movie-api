@@ -1,9 +1,9 @@
-package sg.edu.ntu.simplecrm.services;
+package sg.edu.ntu.movie_api.services;
 
 import java.util.ArrayList;
 
-import sg.edu.ntu.simplecrm.entities.Customer;
-import sg.edu.ntu.simplecrm.entities.Interaction;
+import sg.edu.ntu.movie_api.entities.Customer;
+import sg.edu.ntu.movie_api.entities.Interaction;
 
 public interface CustomerService {
     

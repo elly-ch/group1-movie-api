@@ -1,4 +1,4 @@
-package sg.edu.ntu.simplecrm.entities;
+package sg.edu.ntu.movie_api.entities;
 
 import java.time.LocalDate;
 

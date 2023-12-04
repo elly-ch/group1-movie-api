@@ -1,16 +1,16 @@
-package sg.edu.ntu.simplecrm.serviceImpls;
+package sg.edu.ntu.movie_api.serviceImpls;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import sg.edu.ntu.simplecrm.entities.Customer;
-import sg.edu.ntu.simplecrm.entities.Interaction;
-import sg.edu.ntu.simplecrm.exceptions.CustomerNotFoundException;
-import sg.edu.ntu.simplecrm.repositories.CustomerRepository;
-import sg.edu.ntu.simplecrm.repositories.InteractionRepository;
-import sg.edu.ntu.simplecrm.services.CustomerService;
+import sg.edu.ntu.movie_api.entities.Customer;
+import sg.edu.ntu.movie_api.entities.Interaction;
+import sg.edu.ntu.movie_api.exceptions.CustomerNotFoundException;
+import sg.edu.ntu.movie_api.repositories.CustomerRepository;
+import sg.edu.ntu.movie_api.repositories.InteractionRepository;
+import sg.edu.ntu.movie_api.services.CustomerService;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {

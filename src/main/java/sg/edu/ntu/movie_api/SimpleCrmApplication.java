@@ -1,4 +1,4 @@
-package sg.edu.ntu.simplecrm;
+package sg.edu.ntu.movie_api;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

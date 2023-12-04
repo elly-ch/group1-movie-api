@@ -1,8 +1,8 @@
-package sg.edu.ntu.simplecrm.services;
+package sg.edu.ntu.movie_api.services;
 
 import java.util.ArrayList;
 
-import sg.edu.ntu.simplecrm.entities.Interaction;
+import sg.edu.ntu.movie_api.entities.Interaction;
 
 public interface InteractionService {
     

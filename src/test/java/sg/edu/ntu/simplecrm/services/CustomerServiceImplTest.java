@@ -1,4 +1,4 @@
-package sg.edu.ntu.simplecrm.services;
+package sg.edu.ntu.movie_api.services;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -15,10 +15,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import sg.edu.ntu.simplecrm.entities.Customer;
-import sg.edu.ntu.simplecrm.exceptions.CustomerNotFoundException;
-import sg.edu.ntu.simplecrm.repositories.CustomerRepository;
-import sg.edu.ntu.simplecrm.serviceImpls.CustomerServiceImpl;
+import sg.edu.ntu.movie_api.entities.Customer;
+import sg.edu.ntu.movie_api.exceptions.CustomerNotFoundException;
+import sg.edu.ntu.movie_api.repositories.CustomerRepository;
+import sg.edu.ntu.movie_api.serviceImpls.CustomerServiceImpl;
 
 @SpringBootTest
 public class CustomerServiceImplTest {

@@ -1,4 +1,4 @@
-package sg.edu.ntu.simplecrm.controllers;
+package sg.edu.ntu.movie_api.controllers;
 
 import java.util.ArrayList;
 
@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import sg.edu.ntu.simplecrm.entities.Customer;
-import sg.edu.ntu.simplecrm.entities.Interaction;
-import sg.edu.ntu.simplecrm.services.CustomerService;
+import sg.edu.ntu.movie_api.entities.Customer;
+import sg.edu.ntu.movie_api.entities.Interaction;
+import sg.edu.ntu.movie_api.services.CustomerService;
 
 @RestController
 @RequestMapping("/customers")

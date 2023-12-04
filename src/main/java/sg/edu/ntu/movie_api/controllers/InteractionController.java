@@ -1,4 +1,4 @@
-package sg.edu.ntu.simplecrm.controllers;
+package sg.edu.ntu.movie_api.controllers;
 
 import java.util.ArrayList;
 
@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import sg.edu.ntu.simplecrm.entities.Interaction;
-import sg.edu.ntu.simplecrm.exceptions.InteractionNotFoundException;
-import sg.edu.ntu.simplecrm.services.InteractionService;
+import sg.edu.ntu.movie_api.entities.Interaction;
+import sg.edu.ntu.movie_api.exceptions.InteractionNotFoundException;
+import sg.edu.ntu.movie_api.services.InteractionService;
 
 @RestController
 @RequestMapping("/interactions")

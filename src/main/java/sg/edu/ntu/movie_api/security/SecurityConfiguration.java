@@ -1,4 +1,4 @@
-package sg.edu.ntu.simplecrm.security;
+package sg.edu.ntu.movie_api.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

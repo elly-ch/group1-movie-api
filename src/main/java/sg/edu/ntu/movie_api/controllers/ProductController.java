@@ -1,4 +1,4 @@
-package sg.edu.ntu.simplecrm.controllers;
+package sg.edu.ntu.movie_api.controllers;
 
 import java.util.ArrayList;
 
@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import sg.edu.ntu.simplecrm.entities.Product;
-import sg.edu.ntu.simplecrm.exceptions.ProductNotFoundException;
+import sg.edu.ntu.movie_api.entities.Product;
+import sg.edu.ntu.movie_api.exceptions.ProductNotFoundException;
 
 @RestController
 @RequestMapping("/products")

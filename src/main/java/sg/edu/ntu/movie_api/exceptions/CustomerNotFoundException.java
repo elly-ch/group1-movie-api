@@ -1,4 +1,4 @@
-package sg.edu.ntu.simplecrm.exceptions;
+package sg.edu.ntu.movie_api.exceptions;
 
 public class CustomerNotFoundException extends RuntimeException {
     public CustomerNotFoundException(Long id) {

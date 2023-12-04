@@ -1,4 +1,4 @@
-package sg.edu.ntu.simplecrm.controllers;
+package sg.edu.ntu.movie_api.controllers;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -11,9 +11,9 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import sg.edu.ntu.simplecrm.entities.ErrorResponse;
-import sg.edu.ntu.simplecrm.exceptions.CustomerNotFoundException;
-import sg.edu.ntu.simplecrm.exceptions.InteractionNotFoundException;
+import sg.edu.ntu.movie_api.entities.ErrorResponse;
+import sg.edu.ntu.movie_api.exceptions.CustomerNotFoundException;
+import sg.edu.ntu.movie_api.exceptions.InteractionNotFoundException;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {

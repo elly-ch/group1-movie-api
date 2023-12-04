@@ -1,13 +1,13 @@
-package sg.edu.ntu.simplecrm.serviceImpls;
+package sg.edu.ntu.movie_api.serviceImpls;
 
 import java.util.ArrayList;
 
 import org.springframework.stereotype.Service;
 
-import sg.edu.ntu.simplecrm.entities.Interaction;
-import sg.edu.ntu.simplecrm.exceptions.InteractionNotFoundException;
-import sg.edu.ntu.simplecrm.repositories.InteractionRepository;
-import sg.edu.ntu.simplecrm.services.InteractionService;
+import sg.edu.ntu.movie_api.entities.Interaction;
+import sg.edu.ntu.movie_api.exceptions.InteractionNotFoundException;
+import sg.edu.ntu.movie_api.repositories.InteractionRepository;
+import sg.edu.ntu.movie_api.services.InteractionService;
 
 @Service
 public class InteractionServiceImpl implements InteractionService{
