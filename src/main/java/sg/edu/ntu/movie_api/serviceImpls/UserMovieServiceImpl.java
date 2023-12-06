@@ -1,5 +1,5 @@
 package sg.edu.ntu.movie_api.serviceImpls;
 
-public class DataLoader {
+public class UserMovieServiceImpl {
     
 }

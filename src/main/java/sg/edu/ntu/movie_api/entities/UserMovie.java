@@ -1,5 +1,5 @@
 package sg.edu.ntu.movie_api.entities;
 
-public class ErrorResponse {
+public class UserMovie {
     
 }

@@ -10,9 +10,9 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>sg.edu.ntu</groupId>
-	<artifactId>simple-crm</artifactId>
+	<artifactId>movie_api</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>simple-crm</name>
+	<name>movie_api</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>17</java.version>
