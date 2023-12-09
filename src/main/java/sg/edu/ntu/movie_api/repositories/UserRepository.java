@@ -10,13 +10,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import sg.edu.ntu.movie_api.entities.User;
 
-//import java.util.List;
+import java.util.List;
 
 
 public interface UserRepository extends JpaRepository<User, String> {
     //TODO: check if use of String above is correct (I think it's supposed to be the primary key, which is a String)
     
-// Wilmond's code:
-    // Custom query to find all customers with a certain first name
-    // List<User> findByFirstName(String firstName);
+    // Custom query to find all customers with a certain userId
+    List<User> findByUserId(String userId);
 }

@@ -43,6 +43,9 @@ public class User {
     
     private String name;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "userId", cascade = CascadeType.ALL)
+    private List<UserMovie> userMovies;
+
+    @OneToMany(mappedBy = "userId", cascade = CascadeType.ALL)
     private List<MovieRating> movieRatings;
 }
