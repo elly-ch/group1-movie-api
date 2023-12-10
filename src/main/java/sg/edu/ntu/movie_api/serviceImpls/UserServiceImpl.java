@@ -25,8 +25,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public ArrayList<User> searchUsers(String userId) {
-        List<User> foundUsers = userRepository.findByUserId(userId);
+    public ArrayList<User> searchUsers(String email) {
+        List<User> foundUsers = userRepository.findByEmail(email);
         return (ArrayList<User>) foundUsers;
     }
 
@@ -37,9 +37,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getUser(String userId) {
+    public User getUser(Long userid) {
         // Note to self: findById (from JPA) takes in the primary key
-        return userRepository.findById(userId).orElseThrow(() -> new UserNotFoundException(userId));
+        return userRepository.findById(userid).orElseThrow(() -> new UserNotFoundException(userid));
     }
 
     @Override
@@ -49,11 +49,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User updateUser(String userId, User user) {
+    public User updateUser(Long userid, User user) {
         // retrieve the customer from the database
-        User userToUpdate = userRepository.findById(userId).orElseThrow(() -> new UserNotFoundException(userId));
+        User userToUpdate = userRepository.findById(userid).orElseThrow(() -> new UserNotFoundException(userid));
         
         // update the customer retrieved from the database
+        userToUpdate.setEmail(user.getEmail());
         userToUpdate.setPassword(user.getPassword());
         userToUpdate.setName(user.getName());
 
@@ -62,20 +63,19 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void deleteUser(String userId) {
-        userRepository.deleteById(userId); // deleteById takes in the primary key
+    public void deleteUser(Long userid) {
+        userRepository.deleteById(userid); // deleteById takes in the primary key
     }
 
     @Override
-    public UserMovie addUserMovieToUser(String userId, UserMovie userMovie) {
-        // TODO: debug this method
+    public UserMovie addUserMovieToUser(Long userid, UserMovie userMovie) {
+        // TODO: DEBUG
         // retrieve the user from the database
-        User selectedUser = userRepository.findById(userId).orElseThrow(() -> new UserNotFoundException(userId));
+        User selectedUser = userRepository.findById(userid).orElseThrow(() -> new UserNotFoundException(userid));
 
-        // add the User to the UserMovie
-        userMovie.setUserId(selectedUser); // needs to be implemented in UserMovie.java
-
-        // save the UserMovie to the database
+        // add the customer to the interaction
+        userMovie.setCustomer(selectedUser);
+        // save the interaction to the database
         return userMovieRepository.save(userMovie);
     }
 

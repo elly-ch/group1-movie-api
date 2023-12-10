@@ -13,9 +13,8 @@ import sg.edu.ntu.movie_api.entities.User;
 import java.util.List;
 
 
-public interface UserRepository extends JpaRepository<User, String> {
-    //TODO: check if use of String above is correct (I think it's supposed to be the primary key, which is a String)
-    
-    // Custom query to find all customers with a certain userId
-    List<User> findByUserId(String userId);
+public interface UserRepository extends JpaRepository<User, Long> {
+    // Custom query to find all customers with the specified keyword
+    List<User> findByEmail(String email);
+    //List<User> findByName(String name);
 }

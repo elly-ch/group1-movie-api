@@ -16,7 +16,11 @@ import java.util.List;
 
 //import javax.persistence.Column;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -33,19 +37,37 @@ import lombok.Setter;
 @Entity
 public class User {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "userid")
+    private Long userid;
+
     @Email(message = "Email should be valid")
     @NotBlank(message = "Email is mandatory")
-    //@Column(name = "email") // TODO: check if this is optional
-    private String userId;
+    @Column(name = "email")
+    private String email;
 
     @NotBlank(message = "Password is mandatory")
+    @Column(name = "password")
     private String password;
     
+    @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "userId", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "userid", cascade = CascadeType.ALL)
     private List<UserMovie> userMovies;
 
-    @OneToMany(mappedBy = "userId", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "userid", cascade = CascadeType.ALL)
     private List<MovieRating> movieRatings;
+
+    // below is for dataloader to work:
+    public User(){}
+
+    public User(Long userid, String email, String password, String name) {
+        this();
+        this.userid = userid;
+        this.email = email;
+        this.password = password;
+        this.name = name;
+    }
 }

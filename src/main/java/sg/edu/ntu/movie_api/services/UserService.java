@@ -5,22 +5,22 @@ import java.util.ArrayList;
 import sg.edu.ntu.movie_api.entities.UserMovie;
 import sg.edu.ntu.movie_api.entities.MovieRating;
 import sg.edu.ntu.movie_api.entities.User;
-//import sg.edu.ntu.simplecrm.entities.Interaction;
-
 
 public interface UserService {
     
     User createUser(User user);
 
-    User getUser(String userId);
+    User getUser(Long userid);
 
     ArrayList<User> getAllUsers();
 
-    User updateUser(String id, User user);
+    User updateUser(Long userid, User user);
 
-    void deleteUser(String id); 
+    void deleteUser(Long userid); 
 
-    UserMovie addUserMovieToUser(String userId, UserMovie userMovie);
+    UserMovie addUserMovieToUser(Long userid, UserMovie userMovie);
 
-    ArrayList<User> searchUsers(String userId);
+    MovieRating addMovieRatingToUser(Long userid, MovieRating movieRating);
+
+    ArrayList<User> searchUsers(String userid);
 }
