@@ -14,7 +14,7 @@ import sg.edu.ntu.movie_api.services.UserService;
 
 @Service
 public class UserServiceImpl implements UserService {
-    
+
     private UserRepository userRepository;
     private UserMovieRepository userMovieRepository;
 
@@ -30,7 +30,7 @@ public class UserServiceImpl implements UserService {
         return (ArrayList<User>) foundUsers;
     }
 
-    //@Override
+    // @Override
     public User createUser(User user) {
         User newUser = userRepository.save(user);
         return newUser;
@@ -51,8 +51,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public User updateUser(Long userid, User user) {
         // retrieve the customer from the database
-        User userToUpdate = userRepository.findById(userid).orElseThrow(() -> new UserNotFoundException(userid));
-        
+        User userToUpdate = userRepository.findById(userId).orElseThrow(() -> new UserNotFoundException(userId));
+
         // update the customer retrieved from the database
         userToUpdate.setEmail(user.getEmail());
         userToUpdate.setPassword(user.getPassword());
@@ -78,7 +78,5 @@ public class UserServiceImpl implements UserService {
         // save the interaction to the database
         return userMovieRepository.save(userMovie);
     }
-
-    
 
 }
