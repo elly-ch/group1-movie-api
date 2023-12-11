@@ -2,6 +2,8 @@ package sg.edu.ntu.movie_api.services;
 
 import java.util.ArrayList;
 
+import sg.edu.ntu.movie_api.entities.Genre;
+
 public interface GenreService {
 
     Genre createGenre(Genre genre);

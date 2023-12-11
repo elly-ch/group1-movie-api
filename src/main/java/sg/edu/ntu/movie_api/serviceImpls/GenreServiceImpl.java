@@ -5,6 +5,12 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import sg.edu.ntu.movie_api.entities.Genre;
+import sg.edu.ntu.movie_api.exceptions.GenreNotFoundException;
+import sg.edu.ntu.movie_api.exceptions.MovieRatingNotFoundException;
+import sg.edu.ntu.movie_api.repositories.GenreRepository;
+import sg.edu.ntu.movie_api.services.GenreService;
+
 @Service
 public class GenreServiceImpl implements GenreService {
 
@@ -14,52 +20,58 @@ public class GenreServiceImpl implements GenreService {
         this.genreRepository = genreRepository;
     }
 
-    // POSTGRES
-    @Override
-    public ArrayList<Genre> searchGenres(String genreName) {
-        List<Genre> foundGenres = genreRepository.findByGenreName(genreName);
-        return (ArrayList<Genre>) foundGenres;
-    }
+    // // POSTGRES
+    // @Override
+    // public ArrayList<Genre> searchGenres(String genreName) {
+    //     List<Genre> foundGenres = genreRepository.findByGenreName(genreName);
+    //     return (ArrayList<Genre>) foundGenres;
+    // }
 
+    // POST
     @Override
     public Genre createGenre(Genre genre) {
         Genre newGenre = genreRepository.save(genre);
         return newGenre;
     }
 
+    // GET (ONE)
+    // @Override
+    // public Genre getGenre(Long genreid) {
+    //     Optional<Genre> optionalGenre = genreRepository.findById(genreid);
+    //     if (optionalGenre.isPresent()) {
+    //         Genre foundGenre = optionalGenre.get();
+    //         return foundGenre;
+    //     }
+    //     throw new GenreNotFoundException(genreid);
+    // }
     @Override
-    public Genre getGenre(Long id) {
-        Optional<Genre> optionalGenre = genreRepository.findById(id);
-        if (optionalGenre.isPresent()) {
-            Genre foundGenre = optionalGenre.get();
-            return foundGenre;
-        }
-        throw new GenreNotFoundException(id);
+    public Genre getGenre(Long genreid) {
+        Genre foundGenre = genreRepository.findById(genreid).get();
+        return foundGenre;
     }
 
+    // GET (ALL)
     @Override
     public ArrayList<Genre> getAllGenres() {
         List<Genre> allGenres = genreRepository.findAll();
-        return (ArrayList<Genre>) allGenre;
+        return (ArrayList<Genre>) allGenres;
     }
 
+    // UPDATE
     @Override
-    public Genre updateGenre(Long id, Genre genre) {
+    public Genre updateGenre(Long genreid, Genre genre) {
         // retrieve the genre from the database
-        Genre genreToUpdate = genreRepository.findById(id).get();
+        Genre genreToUpdate = genreRepository.findById(genreid).orElseThrow(()-> new GenreNotFoundException(genreid));
         // update the genre retrieved from the database
-        genreToUpdate.setFirstName(genre.getFirstName());
-        genreToUpdate.setLastName(genre.getLastName());
-        genreToUpdate.setEmail(genre.getEmail());
-        genreToUpdate.setContactNo(genre.getContactNo());
-        genreToUpdate.setJobTitle(genre.getJobTitle());
-        genreToUpdate.setYearOfBirth(genre.getYearOfBirth());
+        genreToUpdate.setGenreid(genre.getGenreid());
+        genreToUpdate.setGenreName(genre.getGenreName());
         // save the updated genre back to the database
         return genreRepository.save(genreToUpdate);
     }
 
+    // DELETE
     @Override
-    public void deleteGenre(Long id) {
-        genreRepository.deleteById(id);
+    public void deleteGenre(Long genreid) {
+        genreRepository.deleteById(genreid);
     }
 }

@@ -4,8 +4,10 @@ import javax.annotation.PostConstruct;
 
 import org.springframework.stereotype.Component;
 
+import sg.edu.ntu.movie_api.entities.Genre;
 import sg.edu.ntu.movie_api.entities.User;
 import sg.edu.ntu.movie_api.entities.UserMovie;
+import sg.edu.ntu.movie_api.repositories.GenreRepository;
 import sg.edu.ntu.movie_api.repositories.UserMovieRepository;
 import sg.edu.ntu.movie_api.repositories.UserRepository;
 
@@ -36,6 +38,9 @@ public class DataLoader {
         userMovieRepository.save(new UserMovie(2L, 3L, 3L));
         userMovieRepository.save(new UserMovie(2L, 1L, 4L));
 
-        // Insert genreRepo (if any)
+        // Insert genreRepo here
+        genreRepository.save(new Genre(1L, "Comedy"));
+        genreRepository.save(new Genre(2L, "Horror"));
+        genreRepository.save(new Genre(3L, "Romance"));
     }
 }
