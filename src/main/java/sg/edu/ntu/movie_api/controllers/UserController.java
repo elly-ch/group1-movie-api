@@ -1,5 +1,80 @@
 package sg.edu.ntu.movie_api.controllers;
 
+import java.util.ArrayList;
+
+import javax.validation.Valid;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import sg.edu.ntu.movie_api.entities.User;
+import sg.edu.ntu.movie_api.services.UserService;
+
+@RestController
+@RequestMapping("/users")
 public class UserController {
-    
+
+    private UserService userService;
+
+    // @Autowired
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
+
+    //@GetMapping("/search") // TODO: see if we want to add this endpoint, and add search by name
+    public ResponseEntity<ArrayList<User>> searchUsers(@RequestParam String email) {
+        ArrayList<User> foundUsers = userService.searchUsersByEmail(email);
+        return new ResponseEntity<>(foundUsers, HttpStatus.OK);
+    }
+
+    // CREATE i.e. POST /users
+    @PostMapping("")
+    public ResponseEntity<User> createUser(@Valid @RequestBody User user) {
+        User newUser = userService.createUser(user);
+        return new ResponseEntity<>(newUser, HttpStatus.CREATED);
+    }
+
+    // READ (GET ALL) i.e. GET /users
+    @GetMapping("")
+    public ResponseEntity<ArrayList<User>> getAllUsers() {
+        ArrayList<User> allUsers = userService.getAllUsers();
+        return new ResponseEntity<>(allUsers, HttpStatus.OK);
+    }
+
+    // READ (GET ONE) i.e. GET /users/{userid}
+    @GetMapping("/{userid}")
+    public ResponseEntity<User> getUser(@PathVariable Long userid) {
+        User foundUser = userService.getUser(userid);
+        return new ResponseEntity<>(foundUser, HttpStatus.OK);
+    }
+
+    // UPDATE
+    @PutMapping("/{userid}")
+    public ResponseEntity<User> updateUser(@PathVariable Long userid, @RequestBody User user) {
+        User updatedUser = userService.updateUser(userid, user);
+        return new ResponseEntity<>(updatedUser, HttpStatus.OK);        
+    }
+
+    @DeleteMapping("/{userid}")
+    public ResponseEntity<User> deleteUser(@PathVariable Long userid) {
+        userService.deleteUser(userid);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    // TODO: check if below should be implemented by UserMovieController & MovieRatingController
+    // Nested route - add interaction to customer
+    // @PostMapping("/{id}/interactions")
+    // public ResponseEntity<Interaction> addInteractionToCustomer(@PathVariable Long id, @Valid @RequestBody Interaction interaction) {
+    //     Interaction newInteraction = customerService.addInteractionToCustomer(id, interaction);
+    //     return new ResponseEntity<>(newInteraction, HttpStatus.CREATED);
+    // }
 }

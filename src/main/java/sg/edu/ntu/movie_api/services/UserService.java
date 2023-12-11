@@ -22,5 +22,5 @@ public interface UserService {
 
     MovieRating addMovieRatingToUser(Long userid, MovieRating movieRating);
 
-    ArrayList<User> searchUsers(String userid);
+    ArrayList<User> searchUsersByEmail(String userid);
 }

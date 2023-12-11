@@ -2,7 +2,9 @@ package sg.edu.ntu.movie_api.services;
 
 import java.util.ArrayList;
 
-public class UserMovieService {
+import sg.edu.ntu.movie_api.entities.UserMovie;
+
+public interface UserMovieService {
     // CREATE
     UserMovie createUserMovie(UserMovie userMovie);
 
