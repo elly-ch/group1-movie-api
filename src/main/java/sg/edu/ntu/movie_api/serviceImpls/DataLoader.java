@@ -13,10 +13,12 @@ import sg.edu.ntu.movie_api.repositories.UserRepository;
 public class DataLoader {
     private UserRepository userRepository;
     private UserMovieRepository userMovieRepository;
+    private GenreRepository genreRepository;
 
-    public DataLoader(UserRepository userRepository, UserMovieRepository userMovieRepository) {
+    public DataLoader(UserRepository userRepository, UserMovieRepository userMovieRepository, GenreRepository genreRepository) {
         this.userRepository = userRepository;
         this.userMovieRepository = userMovieRepository;
+        this.genreRepository = genreRepository;
     }
 
     @PostConstruct
@@ -33,5 +35,7 @@ public class DataLoader {
         userMovieRepository.save(new UserMovie(1L, 2L, 2L));
         userMovieRepository.save(new UserMovie(2L, 3L, 3L));
         userMovieRepository.save(new UserMovie(2L, 1L, 4L));
+
+        // Insert genreRepo (if any)
     }
 }
