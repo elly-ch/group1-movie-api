@@ -41,7 +41,7 @@ public class Movie {
     @Column(name = "movie_description")
     private String movieDescription;
 
-    // TODO: Amend for interaction with genre
+    // TODO: Interaction to genre
     // @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL)
     // private List<Genre> genre;
 

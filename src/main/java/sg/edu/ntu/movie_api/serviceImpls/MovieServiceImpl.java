@@ -2,6 +2,7 @@
 package sg.edu.ntu.movie_api.serviceImpls;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.stereotype.Service;
 
@@ -9,11 +10,24 @@ import org.springframework.stereotype.Service;
 public class MovieServiceImpl implements MovieService{
 
     private MovieRepository movieRepository;
+    // private GenreRepository genreRepository;
 
-    // TODO: Amend by adding interaction with genre?
+    // TODO: Interaction with genre. Hide this and enable line 20 to 30.
     public MovieServiceImpl(MovieRepository movieRepository) {
         this.movieRepository = movieRepository;
     }
+
+    // public MovieServiceImpl(MovieRepository movieRepository, GenreRepository genreRepository) {
+    //     this.movieRepository = movieRepository;
+    //     this.genreRepository = genreRepository;
+    // }
+
+    // @Override
+    // public Genre addInteractionToGenre(Long movieId, Genre interaction) {
+    //     Movie selectedMovie = movieRepository.findById(movieId).orElseThrow(() -> new MovieNotFoundException(movieId));
+    //     interaction.setMovie(selectedMovie);
+    //     return genreRepository.save(interaction);
+    // }
 
     @Override
     public ArrayList<Movie> searchMovies(String movieTitle) {
@@ -53,8 +67,5 @@ public class MovieServiceImpl implements MovieService{
     public void deleteMovie(Long movieId) {
         movieRepository.deleteById(movieId);
     }
-
-    // TODO:
-    // Interaction addInteractiontoMovie(Long movieId, Interaction genre);
     
 }

@@ -15,8 +15,8 @@ public interface MovieService {
 
     void deleteMovie(Long movieId);
 
-    // TODO: Amend for interaction with genre
-    // Interaction addInteractiontoMovie(Long movieId, Interaction genre);
+    // TODO: Interaction with genre
+    // Genre addInteractiontoGenre(Long movieId, Genre interaction);
 
     ArrayList<Movie> searchMovies(String movieTitle);
     
