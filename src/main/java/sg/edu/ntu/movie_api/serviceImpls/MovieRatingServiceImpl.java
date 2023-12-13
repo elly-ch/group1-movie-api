@@ -30,16 +30,22 @@ public class MovieRatingServiceImpl implements MovieRatingService{
         return (ArrayList<MovieRating>) foundMovieRatings;
     }
 
-    @Override
-    public MovieRating getMovieRating(Long id) {
-       //  Optional<Customer> optionalCustomer = customerRepository.findById(id);
-        // if(optionalCustomer.isPresent()) {
-        //     Customer foundCustomer = optionalCustomer.get();
-        //     return foundCustomer;
-        // }
-        // throw new CustomerNotFoundException(id);
-       return movieRatingRepository.findById(id).orElseThrow(()-> new MovieRatingNotFoundException(id));
+
+
+     @Override
+    public MovieRating getMovieRatingForUserAndMovie(Long userid, Long movie_id) {
+       return movieRatingRepository.findByUserIdAndMovieId(userid, movie_id ).orElseThrow(()-> new MovieRatingNotFoundException(userid, movie_id ));
  }
+      @Override
+    public MovieRating getMovieRatingForMovie(Long movie_id) {
+       return movieRatingRepository.findByMovieId(movie_id ).orElseThrow(()-> new MovieRatingNotFoundException(movie_id));
+ }
+
+     @Override
+    public ArrayList<MovieRating> getAllMovieRatingsForUser(Long userid) {
+        List<MovieRating> allMovieRatings = movieRatingRepository.findAllByUserId(userid);
+        return (ArrayList<MovieRating>) allMovieRatings;
+    }
 
     @Override
     public ArrayList<MovieRating> getAllMovieRatings() {
@@ -48,15 +54,21 @@ public class MovieRatingServiceImpl implements MovieRatingService{
     }
 
     @Override
-    public MovieRating updateMovieRating(Long id, MovieRating movieRating) {
+    public MovieRating updateMovieRating(Long userid, Long movie_id, MovieRating movieRating) {
         // retrieve the movieRating from the database
         // [Activity 1 - Refactor code]
-        MovieRating movieRatingToUpdate = movieRatingRepository.findById(id).orElseThrow(()-> new MovieRatingNotFoundException(id));
+        MovieRating movieRatingToUpdate = movieRatingRepository.findByUserIdAndMovieId(userid, movie_id ).orElseThrow(()-> new MovieRatingNotFoundException(userid, movie_id));
         // update the movieRating retrieved from the database
         movieRatingToUpdate.setRating(movieRating.getRating());
 
         // save the updated customer back to the database
         return movieRatingRepository.save(movieRatingToUpdate);
+    }
+
+    @Override
+    public MovieRating getMovieRating(Long id) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getMovieRating'");
     }
 
 

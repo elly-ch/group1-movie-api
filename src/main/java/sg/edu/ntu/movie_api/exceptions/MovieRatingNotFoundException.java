@@ -5,4 +5,7 @@ public class MovieRatingNotFoundException extends RuntimeException {
     public MovieRatingNotFoundException(Long id) {
         super("Could not find movieRating with id: " + id + ".");
     }
+
+    public MovieRatingNotFoundException(Long userid, Long movie_id) {
+    }
 }
