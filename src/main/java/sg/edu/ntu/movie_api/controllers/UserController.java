@@ -23,6 +23,13 @@ import sg.edu.ntu.movie_api.services.UserService;
 @RequestMapping("/users")
 public class UserController {
 
+    /* 
+     * FOR `USERS` ENDPOINTS:
+     * <url> /users
+     * <url> /users/userid
+     * 
+     * Author: Elly
+     */
     private UserService userService;
 
     // @Autowired
@@ -70,11 +77,30 @@ public class UserController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    // TODO: check if below should be implemented by UserMovieController & MovieRatingController
-    // Nested route - add interaction to customer
+    // // Nested route - add interaction to customer
     // @PostMapping("/{id}/interactions")
     // public ResponseEntity<Interaction> addInteractionToCustomer(@PathVariable Long id, @Valid @RequestBody Interaction interaction) {
     //     Interaction newInteraction = customerService.addInteractionToCustomer(id, interaction);
     //     return new ResponseEntity<>(newInteraction, HttpStatus.CREATED);
     // }
+
+    /* 
+     * FOR `USERMOVIE` ENDPOINTS:
+     * <url> /users/userid/movies 
+     * <url> /users/userid/movies/movieid
+     * 
+     * Author: Georgiana
+     */
+
+     // code below
+
+    /* 
+     * FOR `MOVIERATING` ENDPOINTS:
+     * <url> /users/userid/movies 
+     * <url> /users/userid/movies/movieid
+     * 
+     * Author: Anu
+     */
+
+     // code below
 }

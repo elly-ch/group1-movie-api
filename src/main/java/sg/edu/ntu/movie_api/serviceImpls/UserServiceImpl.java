@@ -17,6 +17,14 @@ import sg.edu.ntu.movie_api.services.UserService;
 @Service
 public class UserServiceImpl implements UserService {
 
+    /* 
+     * FOR `USERS` ENDPOINTS:
+     * <url> /users
+     * <url> /users/userid
+     * 
+     * Author: Elly
+     */
+
     private UserRepository userRepository;
     private UserMovieRepository userMovieRepository;
     private MovieRatingRepository movieRatingRepository;
@@ -94,5 +102,25 @@ public class UserServiceImpl implements UserService {
         // save the interaction to the database
         return movieRatingRepository.save(movieRating);
     }
+
+    /* 
+     * FOR `USERMOVIE` ENDPOINTS:
+     * <url> /users/userid/movies 
+     * <url> /users/userid/movies/movieid
+     * 
+     * Author: Georgiana
+     */
+
+     // code below
+
+    /* 
+     * FOR `MOVIERATING` ENDPOINTS:
+     * <url> /users/userid/movies 
+     * <url> /users/userid/movies/movieid
+     * 
+     * Author: Anu
+     */
+
+     // code below
 
 }
