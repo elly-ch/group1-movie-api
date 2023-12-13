@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import sg.edu.ntu.movie_api.entities.Genre;
 import sg.edu.ntu.movie_api.exceptions.GenreNotFoundException;
-import sg.edu.ntu.movie_api.exceptions.MovieRatingNotFoundException;
 import sg.edu.ntu.movie_api.repositories.GenreRepository;
 import sg.edu.ntu.movie_api.services.GenreService;
 
@@ -44,10 +43,14 @@ public class GenreServiceImpl implements GenreService {
     //     }
     //     throw new GenreNotFoundException(genreid);
     // }
+    // @Override
+    // public Genre getGenre(Long genreid) {
+    //     Genre foundGenre = genreRepository.findById(genreid).get();
+    //     return foundGenre;
+    // }
     @Override
     public Genre getGenre(Long genreid) {
-        Genre foundGenre = genreRepository.findById(genreid).get();
-        return foundGenre;
+        return genreRepository.findById(genreid).orElseThrow(()-> new GenreNotFoundException(genreid));
     }
 
     // GET (ALL)

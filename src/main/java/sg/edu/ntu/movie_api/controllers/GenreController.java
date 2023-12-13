@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import sg.edu.ntu.movie_api.entities.ErrorResponse;
 import sg.edu.ntu.movie_api.entities.Genre;
 import sg.edu.ntu.movie_api.services.GenreService;
 
