@@ -56,10 +56,10 @@ public class User {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "userid", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<UserMovie> userMovies;
 
-    @OneToMany(mappedBy = "userid", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<MovieRating> movieRatings;
 
     // below is for dataloader to work:
