@@ -1,5 +1,12 @@
+// package sg.ntu.edu.simplecrm;
 package sg.edu.ntu.movie_api.repositories;
 
-public class MovieRepository {
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface MovieRepository extends JpaRepository<Movie, Long> {
+    // Find all movies with a certain movie title (custom)
+    List<Movie> findByMovieTitle(String movieTitle);
     
 }

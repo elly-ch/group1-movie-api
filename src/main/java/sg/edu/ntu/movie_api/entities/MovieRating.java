@@ -18,20 +18,20 @@ import lombok.Setter;
 @Builder
 @AllArgsConstructor
 @Entity
-@Table(name = "Rating")
+@Table(name = "rating")
 public class MovieRating {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // @ManyToOne
-    // @JoinColumn(name = "user_id")
-    // private User user;
+    @ManyToOne
+    @JoinColumn(name = "userid")
+    private User user;
 
-    // @ManyToOne
-    // @JoinColumn(name = "movie_id")
-    // private Movie movie;
+    @ManyToOne
+    @JoinColumn(name = "movie_id")
+    private Movie movie;
 
     private Integer rating;
 

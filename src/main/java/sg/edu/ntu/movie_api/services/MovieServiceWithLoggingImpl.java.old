@@ -1,0 +1,59 @@
+// package sg.ntu.edu.simplecrm;
+package sg.edu.ntu.movie_api.services;
+
+import java.util.ArrayList;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import org.springframework.context.annotation.Primary;
+import org.springframework.stereotype.Service;
+
+@Primary
+@Service
+public class MovieServiceWithLoggingImpl implements MovieService{
+    private final Logger logger = LoggerFactory.getLogger(MovieServiceWithLoggingImpl.class);
+    private MovieRepository movieRepository;
+
+    public MovieServiceWithLoggingImpl(MovieRepository movieRepository) {
+        this.movieRepository = movieRepository;
+    }
+
+    @Override
+    public Movie createMovie(Movie movie) {
+        return movieRepository.createMovie(movie);
+    }
+
+    @Override
+    public Movie getMovie(String movieId) {
+        return movieRepository.getMovie(getMovieIndex(movieId));
+    }
+
+    @Override
+    public ArrayList<Movie> getAllMovies() {
+        logger.info("MovieServiceWithLoggingImpl.getAllMovies() called");
+        return movieRepository.getAllMovies();
+    }
+
+    @Override
+    public Movie updateMovie(Long movieId, Movie movie) {
+        return movieRepository.updateMovie(getMovieIndex(movieId), movie);
+    }
+
+    @Override
+    public void deleteMovie(Long movieId) {
+        movieRepository.deleteMovie(getMovieIndex(movieId));
+    }
+
+    // helper method
+    private int getMovieIndex(Long movieId) {
+        for (Movie movie: movieRepository.getAllMovies()) {
+            if(movie.getMovieId().equals(movieId)) {
+                return movieRepository.getAllMovies().indexOf(movie);
+            }
+        }
+
+        // else
+        throw new MovieNotFoundException(movieId);
+    }
+}

@@ -22,6 +22,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
@@ -34,6 +35,7 @@ import lombok.Setter;
 @Setter
 @Builder
 @AllArgsConstructor
+@Table(name = "\"user\"")
 @Entity
 public class User {
 
@@ -54,10 +56,10 @@ public class User {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "userid", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<UserMovie> userMovies;
 
-    @OneToMany(mappedBy = "userid", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<MovieRating> movieRatings;
 
     // below is for dataloader to work:

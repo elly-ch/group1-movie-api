@@ -8,8 +8,10 @@ import sg.edu.ntu.movie_api.entities.Genre;
 import sg.edu.ntu.movie_api.entities.User;
 import sg.edu.ntu.movie_api.entities.UserMovie;
 import sg.edu.ntu.movie_api.repositories.GenreRepository;
+import sg.edu.ntu.movie_api.entities.Movie;
 import sg.edu.ntu.movie_api.repositories.UserMovieRepository;
 import sg.edu.ntu.movie_api.repositories.UserRepository;
+import sg.edu.ntu.movie_api.repositories.MovieRepository;
 
 @Component
 public class DataLoader {
@@ -21,12 +23,20 @@ public class DataLoader {
         this.userRepository = userRepository;
         this.userMovieRepository = userMovieRepository;
         this.genreRepository = genreRepository;
+      
+    private MovieRepository movieRepository;
+
+    public DataLoader(UserRepository userRepository, UserMovieRepository userMovieRepository, MovieRepository movieRepository) {
+        this.userRepository = userRepository;
+        this.userMovieRepository = userMovieRepository;
+        this.movieRepository = movieRepository;
     }
 
     @PostConstruct
     public void loadData() {
         // clear the database first
         userRepository.deleteAll();
+        movieRepository.deleteAll();
 
         // load data here
         userRepository.save(new User(1L, "user1@gmail.com", "password1", "name1"));
@@ -42,5 +52,7 @@ public class DataLoader {
         genreRepository.save(new Genre(1L, "Comedy"));
         genreRepository.save(new Genre(2L, "Horror"));
         genreRepository.save(new Genre(3L, "Romance"));
+        movieRepository.save(new Movie("Bettle Juice", 1909, "Halloween Specials"));
+        movieRepository.save(new Movie("Forest Gump", 1978, "A Classic"));
     }
 }
