@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import sg.edu.ntu.movie_api.entities.MovieRating;
 import sg.edu.ntu.movie_api.entities.User;
+import sg.edu.ntu.movie_api.services.MovieRatingService;
 import sg.edu.ntu.movie_api.services.UserService;
 
 @RestController
@@ -94,13 +96,54 @@ public class UserController {
 
      // code below
 
-    /* 
+      /* 
      * FOR `MOVIERATING` ENDPOINTS:
-     * <url> /users/userid/movies 
-     * <url> /users/userid/movies/movieid
-     * 
+     * GetAll - GET<url> /users/movies/rating
+     * GetAll - GET<url> /users/{userid}/movies/rating
+     * GetOne - GET<url> /users/{userid}/{movieid}/rating
+     * GetOne - GET<url> /users/movies/{movieid}/rating
+     * Update - PUT<url> /users/{userid}/movies/{movieid}/rating
      * Author: Anu
      */
 
      // code below
+     private MovieRatingService movieRatingService;
+
+     public UserController(MovieRatingService movieRatingService) {
+         this.movieRatingService = movieRatingService;
+     }
+         // READ (GET ALL) i.e. GET /users/movies/rating
+    @GetMapping("/movies/rating")
+    public ResponseEntity<ArrayList<MovieRating>> getAllMovieRatings() {
+        ArrayList<MovieRating> allMovieRatings = movieRatingService.getAllMovieRatings();
+        return new ResponseEntity<>(allMovieRatings, HttpStatus.OK);
+    }
+
+             // READ (GET ALL) i.e. GET /users/{userid}/movies/rating
+    @GetMapping("/{userid}/movies/rating")
+    public ResponseEntity<ArrayList<MovieRating>> getAllMovieRatingsForUser(@PathVariable Long userid) {
+        ArrayList<MovieRating> allMovieRatings = movieRatingService.getAllMovieRatingsForUser(userid);
+        return new ResponseEntity<>(allMovieRatings, HttpStatus.OK);
+    }
+
+    // READ (GET ONE) i.e. GET /users/{userid}/{movieid}/rating
+    @GetMapping("/{userid}/{movieid}/rating")
+    public ResponseEntity<MovieRating> getMovieRatingForUserAndMovie(@PathVariable Long userid, @PathVariable Long movie_id) {
+        MovieRating foundMovieRating = movieRatingService.getMovieRatingForUserAndMovie(userid, movie_id );
+        return new ResponseEntity<>(foundMovieRating, HttpStatus.OK);
+    }
+
+        // READ (GET ONE) i.e. GET /users/movies/{movieid}/rating
+    @GetMapping("/movies/{movieid}/rating")
+    public ResponseEntity<MovieRating> getMovieRatingForMovie(@PathVariable Long movie_id) {
+        MovieRating foundMovieRating = movieRatingService.getMovieRatingForMovie(movie_id );
+        return new ResponseEntity<>(foundMovieRating, HttpStatus.OK);
+    }
+
+    // UPDATE i.e. PUT /users/{userid}/movies/{movieid}/rating
+    @PutMapping("/{userid}/movies/{movieid}")
+    public ResponseEntity<MovieRating> updateMovieRating(@PathVariable Long userid, @PathVariable Long movie_id, @RequestBody MovieRating movieRating) {
+        MovieRating updatedMovieRating = movieRatingService.updateMovieRating(userid, movie_id, movieRating);
+        return new ResponseEntity<>(updatedMovieRating, HttpStatus.OK);
+    }
 }
