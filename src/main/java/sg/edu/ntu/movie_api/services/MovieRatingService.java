@@ -16,4 +16,5 @@ public interface MovieRatingService {
 
     ArrayList<MovieRating> searchMovieRatings(Integer rating);
 
+
 }

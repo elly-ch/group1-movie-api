@@ -45,11 +45,11 @@ public class MovieRatingController {
         return new ResponseEntity<>(foundMovieRating, HttpStatus.OK);
     }
 
-    // UPDATE
-    @PutMapping("/{id}")
-    public ResponseEntity<MovieRating> updateMovieRating(@PathVariable Long id, @RequestBody MovieRating movieRating) {
-        MovieRating updatedMovieRating = movieRatingService.updateMovieRating(id, movieRating);
-        return new ResponseEntity<>(updatedMovieRating, HttpStatus.OK);
-    }
+    // // UPDATE
+    // @PutMapping("/{id}")
+    // public ResponseEntity<MovieRating> updateMovieRating(@PathVariable Long id, @RequestBody MovieRating movieRating) {
+    //     MovieRating updatedMovieRating = movieRatingService.updateMovieRating(id, movieRating);
+    //     return new ResponseEntity<>(updatedMovieRating, HttpStatus.OK);
+    // }
 
 }
