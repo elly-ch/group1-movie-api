@@ -16,6 +16,7 @@ import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -49,8 +50,9 @@ public class UserMovie {
 
     @JsonBackReference
     @ManyToOne(optional = false)
-    @JoinColumn(name = "movieid", referencedColumnName = "movieid")
+    @JoinColumn(name = "movie_id", referencedColumnName = "movie_id")
     private Movie movie;
 
+    @Id
     private Long userMovieid;
 }

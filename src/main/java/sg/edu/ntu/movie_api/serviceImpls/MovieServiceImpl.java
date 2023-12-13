@@ -6,6 +6,11 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import sg.edu.ntu.movie_api.entities.Movie;
+import sg.edu.ntu.movie_api.exceptions.MovieNotFoundException;
+import sg.edu.ntu.movie_api.repositories.MovieRepository;
+import sg.edu.ntu.movie_api.services.MovieService;
+
 @Service
 public class MovieServiceImpl implements MovieService{
 

@@ -18,6 +18,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import sg.edu.ntu.movie_api.entities.Movie;
+import sg.edu.ntu.movie_api.services.MovieService;
+
 @RestController
 @RequestMapping("/movies")
 public class MovieController {

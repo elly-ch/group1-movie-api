@@ -3,6 +3,8 @@ package sg.edu.ntu.movie_api.services;
 
 import java.util.ArrayList;
 
+import sg.edu.ntu.movie_api.entities.Movie;
+
 public interface MovieService {
 
     Movie createMovie(Movie movie);
