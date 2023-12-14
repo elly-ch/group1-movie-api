@@ -1,7 +1,6 @@
 // package sg.ntu.edu.simplecrm;
 package sg.edu.ntu.movie_api.controllers;
 
-
 import java.util.ArrayList;
 
 import javax.validation.Valid;
@@ -72,8 +71,10 @@ public class MovieController {
 
     // TODO: Genre interaction
     // @PostMapping("/{movieId}/genre")
-    // public ResponseEntity<Genre> addInteractionToGenre(@PathVariable Long movieId, @Valid @RequestBody Genre interaction) {
-    //     Genre newInteraction = movieService.addInteractionToGenre(movieId, interaction);
-    //     return new ResponseEntity<>(newInteraction, HttpStatus.CREATED);
+    // public ResponseEntity<Genre> addInteractionToGenre(@PathVariable Long
+    // movieId, @Valid @RequestBody Genre interaction) {
+    // Genre newInteraction = movieService.addInteractionToGenre(movieId,
+    // interaction);
+    // return new ResponseEntity<>(newInteraction, HttpStatus.CREATED);
     // }
 }

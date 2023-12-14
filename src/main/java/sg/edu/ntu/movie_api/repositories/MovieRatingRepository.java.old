@@ -11,11 +11,12 @@ public interface MovieRatingRepository extends JpaRepository<MovieRating, Long> 
 
     List<MovieRating> findByRating(Integer rating);
 
-    Optional<MovieRating> findByUserIdAndMovieId(Long userid, Long movie_id);
+    // Optional<MovieRating> findByUseridAndMovieid(Long userid, Long movie_id);
 
-    List<MovieRating> findAllByUserId(Long userid);
+    Optional<MovieRating> findByUserAndMovieid(Long userId, Long movieId);
 
-    Optional<MovieRating> findByMovieId(Long movie_id);
-    
+    List<MovieRating> findByUserid(Long userid);
+
+    Optional<MovieRating> findByMovieid(Long movie_id);
+
 }
-

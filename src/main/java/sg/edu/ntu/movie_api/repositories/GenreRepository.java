@@ -7,5 +7,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import sg.edu.ntu.movie_api.entities.Genre;
 
 public interface GenreRepository extends JpaRepository<Genre, Long> {
-    List<Genre> findByGenre(String genreName);
+    List<Genre> findByGenreName(String genreName);
 }

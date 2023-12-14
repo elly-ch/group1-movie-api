@@ -52,18 +52,19 @@ public class User {
     @NotBlank(message = "Password is mandatory")
     @Column(name = "password")
     private String password;
-    
+
     @Column(name = "name")
     private String name;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<UserMovie> userMovies;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<MovieRating> movieRatings;
+    // @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    // private List<MovieRating> movieRatings;
 
     // below is for dataloader to work:
-    public User(){}
+    public User() {
+    }
 
     public User(Long userid, String email, String password, String name) {
         this();

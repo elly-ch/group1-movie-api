@@ -36,8 +36,10 @@ public class Genre {
     private String genreName;
 
     // One to Many R/s with Movie.java
-    @OneToMany(mappedBy = "genre", cascade = CascadeType.ALL)
-    private List<Movie> Movie;
+    // @OneToMany(mappedBy = "genre", cascade = CascadeType.ALL)
+    // private List<Movie> Movie;
+    @OneToMany(mappedBy = "genre")
+    private List<Movie> movies;
 
     // DataLoader
     public Genre() {

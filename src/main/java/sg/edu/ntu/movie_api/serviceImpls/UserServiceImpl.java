@@ -7,7 +7,7 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import sg.edu.ntu.movie_api.entities.Movie;
-import sg.edu.ntu.movie_api.entities.MovieRating;
+// import sg.edu.ntu.movie_api.entities.MovieRating;
 import sg.edu.ntu.movie_api.entities.User;
 import sg.edu.ntu.movie_api.entities.UserMovie;
 import sg.edu.ntu.movie_api.exceptions.MovieNotFoundException;
@@ -16,7 +16,7 @@ import sg.edu.ntu.movie_api.exceptions.UserMovieNotFoundException;
 import sg.edu.ntu.movie_api.exceptions.UserMoviesNotFoundException;
 import sg.edu.ntu.movie_api.exceptions.UserNotFoundException;
 import sg.edu.ntu.movie_api.repositories.UserRepository;
-import sg.edu.ntu.movie_api.repositories.MovieRatingRepository;
+// import sg.edu.ntu.movie_api.repositories.MovieRatingRepository;
 import sg.edu.ntu.movie_api.repositories.MovieRepository;
 import sg.edu.ntu.movie_api.repositories.UserMovieRepository;
 import sg.edu.ntu.movie_api.services.UserService;
@@ -35,7 +35,7 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
     private MovieRepository movieRepository;
     private UserMovieRepository userMovieRepository;
-    private MovieRatingRepository movieRatingRepository;
+    // private MovieRatingRepository movieRatingRepository;
 
     // @Autowired
     public UserServiceImpl(UserRepository userRepository, UserMovieRepository userMovieRepository) {
@@ -98,18 +98,20 @@ public class UserServiceImpl implements UserService {
         return userMovieRepository.save(userMovie);
     }
 
-    @Override
-    public MovieRating addMovieRatingToUser(Long userid, MovieRating movieRating) {
-        // TODO: DEBUG
-        // retrieve the user from the database
-        User selectedUser = userRepository.findById(userid).orElseThrow(() -> new UserNotFoundException(userid));
+    // @Override
+    // public MovieRating addMovieRatingToUser(Long userid, MovieRating movieRating)
+    // {
+    // // TODO: DEBUG
+    // // retrieve the user from the database
+    // User selectedUser = userRepository.findById(userid).orElseThrow(() -> new
+    // UserNotFoundException(userid));
 
-        // add the customer to the interaction
-        // TODO: uncomment user field in MovieRating entity for this to work
-        movieRating.setUser(selectedUser);
-        // save the interaction to the database
-        return movieRatingRepository.save(movieRating);
-    }
+    // // add the customer to the interaction
+    // // TODO: uncomment user field in MovieRating entity for this to work
+    // movieRating.setUser(selectedUser);
+    // // save the interaction to the database
+    // return movieRatingRepository.save(movieRating);
+    // }
 
     /*
      * FOR `USERMOVIE` ENDPOINTS:

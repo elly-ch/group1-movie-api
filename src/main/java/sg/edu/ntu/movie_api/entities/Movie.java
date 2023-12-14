@@ -44,9 +44,9 @@ public class Movie {
     private String movieDescription;
 
     // TODO: Interaction to genre
-    // @ManyToOne
-    // @JoinColumn(name = "genre_id")
-    // private Genre genre;
+    @ManyToOne
+    @JoinColumn(name = "genre_id")
+    private Genre genre;
 
     public Movie() {
     }

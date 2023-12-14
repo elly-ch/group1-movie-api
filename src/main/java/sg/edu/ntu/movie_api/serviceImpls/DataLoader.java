@@ -2,6 +2,7 @@ package sg.edu.ntu.movie_api.serviceImpls;
 
 import javax.annotation.PostConstruct;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import sg.edu.ntu.movie_api.entities.Genre;
@@ -15,24 +16,31 @@ import sg.edu.ntu.movie_api.repositories.MovieRepository;
 
 @Component
 public class DataLoader {
+
     private UserRepository userRepository;
     private UserMovieRepository userMovieRepository;
     private GenreRepository genreRepository;
-
-    public DataLoader(UserRepository userRepository, UserMovieRepository userMovieRepository,
-            GenreRepository genreRepository) {
-        this.userRepository = userRepository;
-        this.userMovieRepository = userMovieRepository;
-        this.genreRepository = genreRepository;
-    }
-
     private MovieRepository movieRepository;
 
+    public DataLoader() {
+    }
+
+    // @Autowired
+    // public DataLoader(UserRepository userRepository, UserMovieRepository
+    // userMovieRepository,
+    // GenreRepository genreRepository) {
+    // this.userRepository = userRepository;
+    // this.userMovieRepository = userMovieRepository;
+    // this.genreRepository = genreRepository;
+    // }
+
+    @Autowired
     public DataLoader(UserRepository userRepository, UserMovieRepository userMovieRepository,
-            MovieRepository movieRepository) {
+            MovieRepository movieRepository, GenreRepository genreRepository) {
         this.userRepository = userRepository;
         this.userMovieRepository = userMovieRepository;
         this.movieRepository = movieRepository;
+        this.genreRepository = genreRepository;
     }
 
     @PostConstruct
@@ -40,6 +48,8 @@ public class DataLoader {
         // clear the database first
         userRepository.deleteAll();
         movieRepository.deleteAll();
+        genreRepository.deleteAll();
+        userMovieRepository.deleteAll();
 
         // load data here
         userRepository.save(new User(1L, "user1@gmail.com", "password1", "name1"));
@@ -50,12 +60,13 @@ public class DataLoader {
         genreRepository.save(new Genre(1L, "Comedy"));
         genreRepository.save(new Genre(2L, "Horror"));
         genreRepository.save(new Genre(3L, "Romance"));
+
         movieRepository.save(new Movie("Bettle Juice", 1909, "Halloween Specials"));
         movieRepository.save(new Movie("Forest Gump", 1978, "A Classic"));
 
         userMovieRepository.save(new UserMovie(1L, 1L));
         userMovieRepository.save(new UserMovie(1L, 2L));
-        userMovieRepository.save(new UserMovie(2L, 3L));
+        userMovieRepository.save(new UserMovie(2L, 2L));
         userMovieRepository.save(new UserMovie(2L, 1L));
     }
 }

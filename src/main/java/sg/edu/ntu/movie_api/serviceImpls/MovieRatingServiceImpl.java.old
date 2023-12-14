@@ -2,7 +2,7 @@ package sg.edu.ntu.movie_api.serviceImpls;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 import sg.edu.ntu.movie_api.services.MovieRatingService;
@@ -11,40 +11,45 @@ import sg.edu.ntu.movie_api.entities.MovieRating;
 import sg.edu.ntu.movie_api.exceptions.MovieRatingNotFoundException;
 import sg.edu.ntu.movie_api.repositories.MovieRatingRepository;
 
-
-
 @Service
-public class MovieRatingServiceImpl implements MovieRatingService{
+public class MovieRatingServiceImpl implements MovieRatingService {
 
     private MovieRatingRepository movieRatingRepository;
-
 
     // @Autowired
     public MovieRatingServiceImpl(MovieRatingRepository movieRatingRepository) {
         this.movieRatingRepository = movieRatingRepository;
     }
 
- @Override
+    @Override
     public ArrayList<MovieRating> searchMovieRatings(Integer rating) {
         List<MovieRating> foundMovieRatings = movieRatingRepository.findByRating(rating);
         return (ArrayList<MovieRating>) foundMovieRatings;
     }
 
-
-
-     @Override
+    @Override
     public MovieRating getMovieRatingForUserAndMovie(Long userid, Long movie_id) {
-       return movieRatingRepository.findByUserIdAndMovieId(userid, movie_id ).orElseThrow(()-> new MovieRatingNotFoundException(userid, movie_id ));
- }
-      @Override
-    public MovieRating getMovieRatingForMovie(Long movie_id) {
-       return movieRatingRepository.findByMovieId(movie_id ).orElseThrow(()-> new MovieRatingNotFoundException(movie_id));
- }
+        // return movieRatingRepository.findByUseridAndMovieid(userid, movie_id)
+        // .orElseThrow(() -> new MovieRatingNotFoundException(userid, movie_id));
+        return movieRatingRepository.findByUserAndMovieid(userid, movie_id)
+                .orElseThrow(() -> new MovieRatingNotFoundException(userid, movie_id));
+    }
 
-     @Override
+    @Override
+    public MovieRating getMovieRatingForMovie(Long movie_id) {
+        return movieRatingRepository.findByMovieid(movie_id)
+                .orElseThrow(() -> new MovieRatingNotFoundException(movie_id));
+    }
+
+    @Override
     public ArrayList<MovieRating> getAllMovieRatingsForUser(Long userid) {
-        List<MovieRating> allMovieRatings = movieRatingRepository.findAllByUserId(userid);
+        List<MovieRating> allMovieRatings = movieRatingRepository.findByUserid(userid);
+        if (allMovieRatings.isEmpty()) {
+            throw new MovieRatingNotFoundException(userid);
+        }
+        ;
         return (ArrayList<MovieRating>) allMovieRatings;
+
     }
 
     @Override
@@ -57,7 +62,11 @@ public class MovieRatingServiceImpl implements MovieRatingService{
     public MovieRating updateMovieRating(Long userid, Long movie_id, MovieRating movieRating) {
         // retrieve the movieRating from the database
         // [Activity 1 - Refactor code]
-        MovieRating movieRatingToUpdate = movieRatingRepository.findByUserIdAndMovieId(userid, movie_id ).orElseThrow(()-> new MovieRatingNotFoundException(userid, movie_id));
+        // MovieRating movieRatingToUpdate =
+        // movieRatingRepository.findByUseridAndMovieid(userid, movie_id)
+        // .orElseThrow(() -> new MovieRatingNotFoundException(userid, movie_id));
+        MovieRating movieRatingToUpdate = movieRatingRepository.findByUserAndMovieid(userid, movie_id)
+                .orElseThrow(() -> new MovieRatingNotFoundException(userid, movie_id));
         // update the movieRating retrieved from the database
         movieRatingToUpdate.setRating(movieRating.getRating());
 
@@ -70,7 +79,5 @@ public class MovieRatingServiceImpl implements MovieRatingService{
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getMovieRating'");
     }
-
-
 
 }
