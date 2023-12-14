@@ -42,7 +42,7 @@ public class UserController {
 
     // @GetMapping("/search") // TODO: see if we want to add this endpoint, and add
     // search by name
-    public ResponseEntity<ArrayList<User>> searchUsers(@RequestParam String email) {
+    public ResponseEntity<ArrayList<User>> searchUsers(@Valid @RequestParam String email) {
         ArrayList<User> foundUsers = userService.searchUsersByEmail(email);
         return new ResponseEntity<>(foundUsers, HttpStatus.OK);
     }
