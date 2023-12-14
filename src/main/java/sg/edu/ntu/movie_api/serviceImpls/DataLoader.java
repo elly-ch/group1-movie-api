@@ -9,7 +9,9 @@ import sg.edu.ntu.movie_api.entities.Genre;
 import sg.edu.ntu.movie_api.entities.User;
 import sg.edu.ntu.movie_api.entities.UserMovie;
 import sg.edu.ntu.movie_api.repositories.GenreRepository;
+import sg.edu.ntu.movie_api.repositories.MovieRatingRepository;
 import sg.edu.ntu.movie_api.entities.Movie;
+import sg.edu.ntu.movie_api.entities.MovieRating;
 import sg.edu.ntu.movie_api.repositories.UserMovieRepository;
 import sg.edu.ntu.movie_api.repositories.UserRepository;
 import sg.edu.ntu.movie_api.repositories.MovieRepository;
@@ -21,6 +23,7 @@ public class DataLoader {
     private UserMovieRepository userMovieRepository;
     private GenreRepository genreRepository;
     private MovieRepository movieRepository;
+    private MovieRatingRepository movieRatingRepository;
 
     public DataLoader() {
     }
@@ -36,11 +39,12 @@ public class DataLoader {
 
     @Autowired
     public DataLoader(UserRepository userRepository, UserMovieRepository userMovieRepository,
-            MovieRepository movieRepository, GenreRepository genreRepository) {
+            MovieRepository movieRepository, GenreRepository genreRepository, MovieRatingRepository movieRatingRepository) {
         this.userRepository = userRepository;
         this.userMovieRepository = userMovieRepository;
         this.movieRepository = movieRepository;
         this.genreRepository = genreRepository;
+        this.movieRatingRepository = movieRatingRepository;
     }
 
     @PostConstruct
@@ -68,5 +72,10 @@ public class DataLoader {
         userMovieRepository.save(new UserMovie(1L, 2L));
         userMovieRepository.save(new UserMovie(2L, 2L));
         userMovieRepository.save(new UserMovie(2L, 1L));
+
+        movieRatingRepository.save(new MovieRating(1L, 1L, 5));
+        movieRatingRepository.save(new MovieRating(1L, 2L, 3));
+        movieRatingRepository.save(new MovieRating(2L, 2L, 2));
+        movieRatingRepository.save(new MovieRating(2L, 1L, 4));
     }
 }

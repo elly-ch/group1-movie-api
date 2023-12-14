@@ -5,18 +5,17 @@ import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
+
 import sg.edu.ntu.movie_api.entities.MovieRating;
 
 public interface MovieRatingRepository extends JpaRepository<MovieRating, Long> {
 
     List<MovieRating> findByRating(Integer rating);
 
-    // Optional<MovieRating> findByUseridAndMovieid(Long userid, Long movie_id);
+    Optional<MovieRating> findByUseridAndMovieid(Long userid, Long movieid);
 
-    Optional<MovieRating> findByUserAndMovieid(Long userId, Long movieId);
+    List<MovieRating> findRatingByUserid(Long userid);
 
-    List<MovieRating> findByUserid(Long userid);
-
-    Optional<MovieRating> findByMovieid(Long movie_id);
+    List<MovieRating> findRatingByMovieid(Long movieid);
 
 }

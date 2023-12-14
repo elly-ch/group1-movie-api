@@ -59,8 +59,8 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<UserMovie> userMovies;
 
-    // @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    // private List<MovieRating> movieRatings;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<MovieRating> movieRatings;
 
     // below is for dataloader to work:
     public User() {
