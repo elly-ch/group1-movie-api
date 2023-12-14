@@ -9,6 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
@@ -25,11 +27,11 @@ import lombok.Setter;
 @Entity
 @Table(name = "movie")
 public class Movie {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "movie_id")
-    private Long movieId;
+    private Long movieid;
 
     @NotBlank(message = "Movie Title is mandatory")
     @Column(name = "movie_title")
@@ -42,12 +44,14 @@ public class Movie {
     private String movieDescription;
 
     // TODO: Interaction to genre
-    // @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL)
-    // private List<Genre> genre;
+    // @ManyToOne
+    // @JoinColumn(name = "genre_id")
+    // private Genre genre;
 
-    public Movie(){}
+    public Movie() {
+    }
 
-    public Movie(String movieTitle, int movieYear, String movieDescription){
+    public Movie(String movieTitle, int movieYear, String movieDescription) {
         this();
         this.movieTitle = movieTitle;
         this.movieYear = movieYear;

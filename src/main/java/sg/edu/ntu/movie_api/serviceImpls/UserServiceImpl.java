@@ -2,22 +2,29 @@ package sg.edu.ntu.movie_api.serviceImpls;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import sg.edu.ntu.movie_api.entities.Movie;
 import sg.edu.ntu.movie_api.entities.MovieRating;
 import sg.edu.ntu.movie_api.entities.User;
 import sg.edu.ntu.movie_api.entities.UserMovie;
+import sg.edu.ntu.movie_api.exceptions.MovieNotFoundException;
+import sg.edu.ntu.movie_api.exceptions.UserMovieAlreadyExistsException;
+import sg.edu.ntu.movie_api.exceptions.UserMovieNotFoundException;
+import sg.edu.ntu.movie_api.exceptions.UserMoviesNotFoundException;
 import sg.edu.ntu.movie_api.exceptions.UserNotFoundException;
 import sg.edu.ntu.movie_api.repositories.UserRepository;
 import sg.edu.ntu.movie_api.repositories.MovieRatingRepository;
+import sg.edu.ntu.movie_api.repositories.MovieRepository;
 import sg.edu.ntu.movie_api.repositories.UserMovieRepository;
 import sg.edu.ntu.movie_api.services.UserService;
 
 @Service
 public class UserServiceImpl implements UserService {
 
-    /* 
+    /*
      * FOR `USERS` ENDPOINTS:
      * <url> /users
      * <url> /users/userid
@@ -26,6 +33,7 @@ public class UserServiceImpl implements UserService {
      */
 
     private UserRepository userRepository;
+    private MovieRepository movieRepository;
     private UserMovieRepository userMovieRepository;
     private MovieRatingRepository movieRatingRepository;
 
@@ -103,24 +111,90 @@ public class UserServiceImpl implements UserService {
         return movieRatingRepository.save(movieRating);
     }
 
-    /* 
+    /*
      * FOR `USERMOVIE` ENDPOINTS:
-     * <url> /users/userid/movies 
+     * <url> /users/userid/movies
      * <url> /users/userid/movies/movieid
      * 
      * Author: Georgiana
      */
 
-     // code below
+    // code below
+    @Override
+    public UserMovie getUserMovie(Long userid, Long movieid) {
+        // check if user and movie exist
+        userRepository.findById(userid).orElseThrow(() -> new UserNotFoundException(userid));
+        movieRepository.findById(movieid).orElseThrow(() -> new MovieNotFoundException(movieid));
 
-    /* 
+        // check if user saved the movie
+        // check if there is already an existing record
+        Optional<UserMovie> searchUserMovie = userMovieRepository.findByUseridAndMovieid(userid, movieid);
+        if (searchUserMovie.isEmpty()) {
+            // if user didn't save the movie, nothing to delete & throw exception
+            throw new UserMovieNotFoundException(userid, movieid);
+        }
+        UserMovie foundUserMovie = searchUserMovie.get();
+
+        return foundUserMovie;
+    }
+
+    @Override
+    public ArrayList<UserMovie> getAllUserMovies(Long userid) {
+        // check if user exists
+        userRepository.findById(userid).orElseThrow(() -> new UserNotFoundException(userid));
+
+        List<UserMovie> searchUserMovies = userMovieRepository.findByUserid(userid);
+        if (searchUserMovies.isEmpty()) {
+            // if user didn't save the movie, nothing to delete & throw exception
+            throw new UserMoviesNotFoundException(userid);
+        }
+        return (ArrayList<UserMovie>) searchUserMovies;
+    }
+
+    @Override
+    public UserMovie addUserMovie(Long userid, Long movieid) {
+        // TODO: DEBUG
+        // retrieve the user and movie from the database
+        userRepository.findById(userid).orElseThrow(() -> new UserNotFoundException(userid));
+        movieRepository.findById(movieid).orElseThrow(() -> new MovieNotFoundException(movieid));
+
+        // check if there is already an existing record
+        Optional<UserMovie> foundUserMovie = userMovieRepository.findByUseridAndMovieid(userid, movieid);
+        if (!foundUserMovie.isEmpty()) {
+            // if user didn't save the movie, nothing to delete & throw exception
+            throw new UserMovieAlreadyExistsException(userid, movieid);
+        }
+
+        // add new User-Movie record
+        UserMovie newUserMovie = new UserMovie(userid, movieid);
+        return userMovieRepository.save(newUserMovie);
+    }
+
+    @Override
+    public void deleteUserMovie(Long userid, Long movieid) {
+        // check if user and movie exist
+        userRepository.findById(userid).orElseThrow(() -> new UserNotFoundException(userid));
+        movieRepository.findById(movieid).orElseThrow(() -> new MovieNotFoundException(movieid));
+
+        // check if user saved the movie
+        Optional<UserMovie> foundUserMovie = userMovieRepository.findByUseridAndMovieid(userid, movieid);
+        if (foundUserMovie.isEmpty()) {
+            // if user didn't save the movie, nothing to delete & throw exception
+            throw new UserMovieNotFoundException(userid, movieid);
+        } else {
+            // if user saved the movie, delete the record
+            userMovieRepository.deleteByUseridAndMovieid(userid, movieid);
+        }
+    }
+
+    /*
      * FOR `MOVIERATING` ENDPOINTS:
-     * <url> /users/userid/movies 
+     * <url> /users/userid/movies
      * <url> /users/userid/movies/movieid
      * 
      * Author: Anu
      */
 
-     // code below
+    // code below
 
 }

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import sg.edu.ntu.movie_api.entities.MovieRating;
 import sg.edu.ntu.movie_api.entities.User;
+import sg.edu.ntu.movie_api.entities.UserMovie;
 import sg.edu.ntu.movie_api.services.MovieRatingService;
 import sg.edu.ntu.movie_api.services.UserService;
 
@@ -25,7 +26,7 @@ import sg.edu.ntu.movie_api.services.UserService;
 @RequestMapping("/users")
 public class UserController {
 
-    /* 
+    /*
      * FOR `USERS` ENDPOINTS:
      * <url> /users
      * <url> /users/userid
@@ -39,7 +40,8 @@ public class UserController {
         this.userService = userService;
     }
 
-    //@GetMapping("/search") // TODO: see if we want to add this endpoint, and add search by name
+    // @GetMapping("/search") // TODO: see if we want to add this endpoint, and add
+    // search by name
     public ResponseEntity<ArrayList<User>> searchUsers(@RequestParam String email) {
         ArrayList<User> foundUsers = userService.searchUsersByEmail(email);
         return new ResponseEntity<>(foundUsers, HttpStatus.OK);
@@ -70,7 +72,7 @@ public class UserController {
     @PutMapping("/{userid}")
     public ResponseEntity<User> updateUser(@PathVariable Long userid, @RequestBody User user) {
         User updatedUser = userService.updateUser(userid, user);
-        return new ResponseEntity<>(updatedUser, HttpStatus.OK);        
+        return new ResponseEntity<>(updatedUser, HttpStatus.OK);
     }
 
     @DeleteMapping("/{userid}")
@@ -81,22 +83,47 @@ public class UserController {
 
     // // Nested route - add interaction to customer
     // @PostMapping("/{id}/interactions")
-    // public ResponseEntity<Interaction> addInteractionToCustomer(@PathVariable Long id, @Valid @RequestBody Interaction interaction) {
-    //     Interaction newInteraction = customerService.addInteractionToCustomer(id, interaction);
-    //     return new ResponseEntity<>(newInteraction, HttpStatus.CREATED);
+    // public ResponseEntity<Interaction> addInteractionToCustomer(@PathVariable
+    // Long id, @Valid @RequestBody Interaction interaction) {
+    // Interaction newInteraction = customerService.addInteractionToCustomer(id,
+    // interaction);
+    // return new ResponseEntity<>(newInteraction, HttpStatus.CREATED);
     // }
 
-    /* 
+    /*
      * FOR `USERMOVIE` ENDPOINTS:
-     * <url> /users/userid/movies 
+     * <url> /users/userid/movies
      * <url> /users/userid/movies/movieid
      * 
      * Author: Georgiana
      */
 
-     // code below
+    // code below
+    @GetMapping("/{userid}/movies/")
+    public ResponseEntity<ArrayList<UserMovie>> getAllUserMovies(@PathVariable Long userid) {
+        ArrayList<UserMovie> foundUserMovies = userService.getAllUserMovies(userid);
+        return new ResponseEntity<>(foundUserMovies, HttpStatus.OK);
+    }
 
-      /* 
+    @PostMapping("/{userid}/movies/{movieid}")
+    public ResponseEntity<UserMovie> addUserMovie(@PathVariable Long userid, Long movieid) {
+        UserMovie newUserMovie = userService.addUserMovie(userid, movieid);
+        return new ResponseEntity<>(newUserMovie, HttpStatus.CREATED);
+    }
+
+    @GetMapping("/{userid}/movies/{movieid}")
+    public ResponseEntity<UserMovie> getUserMovie(@PathVariable Long userid, Long movieid) {
+        UserMovie foundUserMovie = userService.getUserMovie(userid, movieid);
+        return new ResponseEntity<>(foundUserMovie, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{userid}/movies/{movieid}")
+    public ResponseEntity<UserMovie> deleteUserMovie(@PathVariable Long userid, Long movieid) {
+        userService.deleteUserMovie(userid, movieid);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    /*
      * FOR `MOVIERATING` ENDPOINTS:
      * GetAll - GET<url> /users/movies/rating
      * GetAll - GET<url> /users/{userid}/movies/rating
@@ -106,20 +133,21 @@ public class UserController {
      * Author: Anu
      */
 
-     // code below
-     private MovieRatingService movieRatingService;
+    // code below
+    private MovieRatingService movieRatingService;
 
-     public UserController(MovieRatingService movieRatingService) {
-         this.movieRatingService = movieRatingService;
-     }
-         // READ (GET ALL) i.e. GET /users/movies/rating
+    public UserController(MovieRatingService movieRatingService) {
+        this.movieRatingService = movieRatingService;
+    }
+
+    // READ (GET ALL) i.e. GET /users/movies/rating
     @GetMapping("/movies/rating")
     public ResponseEntity<ArrayList<MovieRating>> getAllMovieRatings() {
         ArrayList<MovieRating> allMovieRatings = movieRatingService.getAllMovieRatings();
         return new ResponseEntity<>(allMovieRatings, HttpStatus.OK);
     }
 
-             // READ (GET ALL) i.e. GET /users/{userid}/movies/rating
+    // READ (GET ALL) i.e. GET /users/{userid}/movies/rating
     @GetMapping("/{userid}/movies/rating")
     public ResponseEntity<ArrayList<MovieRating>> getAllMovieRatingsForUser(@PathVariable Long userid) {
         ArrayList<MovieRating> allMovieRatings = movieRatingService.getAllMovieRatingsForUser(userid);
@@ -128,21 +156,23 @@ public class UserController {
 
     // READ (GET ONE) i.e. GET /users/{userid}/{movieid}/rating
     @GetMapping("/{userid}/{movieid}/rating")
-    public ResponseEntity<MovieRating> getMovieRatingForUserAndMovie(@PathVariable Long userid, @PathVariable Long movie_id) {
-        MovieRating foundMovieRating = movieRatingService.getMovieRatingForUserAndMovie(userid, movie_id );
+    public ResponseEntity<MovieRating> getMovieRatingForUserAndMovie(@PathVariable Long userid,
+            @PathVariable Long movie_id) {
+        MovieRating foundMovieRating = movieRatingService.getMovieRatingForUserAndMovie(userid, movie_id);
         return new ResponseEntity<>(foundMovieRating, HttpStatus.OK);
     }
 
-        // READ (GET ONE) i.e. GET /users/movies/{movieid}/rating
+    // READ (GET ONE) i.e. GET /users/movies/{movieid}/rating
     @GetMapping("/movies/{movieid}/rating")
     public ResponseEntity<MovieRating> getMovieRatingForMovie(@PathVariable Long movie_id) {
-        MovieRating foundMovieRating = movieRatingService.getMovieRatingForMovie(movie_id );
+        MovieRating foundMovieRating = movieRatingService.getMovieRatingForMovie(movie_id);
         return new ResponseEntity<>(foundMovieRating, HttpStatus.OK);
     }
 
     // UPDATE i.e. PUT /users/{userid}/movies/{movieid}/rating
     @PutMapping("/{userid}/movies/{movieid}")
-    public ResponseEntity<MovieRating> updateMovieRating(@PathVariable Long userid, @PathVariable Long movie_id, @RequestBody MovieRating movieRating) {
+    public ResponseEntity<MovieRating> updateMovieRating(@PathVariable Long userid, @PathVariable Long movie_id,
+            @RequestBody MovieRating movieRating) {
         MovieRating updatedMovieRating = movieRatingService.updateMovieRating(userid, movie_id, movieRating);
         return new ResponseEntity<>(updatedMovieRating, HttpStatus.OK);
     }

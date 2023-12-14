@@ -13,22 +13,24 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import sg.edu.ntu.movie_api.entities.ErrorResponse;
 
-
 @ControllerAdvice
 public class GlobalExceptionHandler {
-    
+
     // this is handler for CustomerNotFoundException
-    @ExceptionHandler({MovieRatingNotFoundException.class})
-    public ResponseEntity<ErrorResponse> handleResourceNotFoundException(MovieRatingNotFoundException ex){
+    @ExceptionHandler({ MovieRatingNotFoundException.class, UserMovieNotFoundException.class,
+            UserMoviesNotFoundException.class })
+    public ResponseEntity<ErrorResponse> handleResourceNotFoundException(MovieRatingNotFoundException ex) {
         ErrorResponse errorResponse = new ErrorResponse(ex.getMessage(), LocalDateTime.now());
         return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
     }
 
     // [Activity 1 - Refactor]
     // @ExceptionHandler(InteractionNotFoundException.class)
-    // public ResponseEntity<ErrorResponse> handleInteractionNotFoundException(CustomerNotFoundException ex){
-    //     ErrorResponse errorResponse = new ErrorResponse(ex.getMessage(), LocalDateTime.now());
-    //     return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+    // public ResponseEntity<ErrorResponse>
+    // handleInteractionNotFoundException(CustomerNotFoundException ex){
+    // ErrorResponse errorResponse = new ErrorResponse(ex.getMessage(),
+    // LocalDateTime.now());
+    // return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
     // }
 
     @ExceptionHandler(EmptyResultDataAccessException.class)
@@ -38,7 +40,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<ErrorResponse> handleValidationExceptions(MethodArgumentNotValidException ex){
+    public ResponseEntity<ErrorResponse> handleValidationExceptions(MethodArgumentNotValidException ex) {
         // Get a list of all validation errors from the exception object
         List<ObjectError> validationErrors = ex.getBindingResult().getAllErrors();
 

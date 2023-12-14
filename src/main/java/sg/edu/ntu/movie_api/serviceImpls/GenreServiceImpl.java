@@ -22,8 +22,8 @@ public class GenreServiceImpl implements GenreService {
     // // POSTGRES
     // @Override
     // public ArrayList<Genre> searchGenres(String genreName) {
-    //     List<Genre> foundGenres = genreRepository.findByGenreName(genreName);
-    //     return (ArrayList<Genre>) foundGenres;
+    // List<Genre> foundGenres = genreRepository.findByGenreName(genreName);
+    // return (ArrayList<Genre>) foundGenres;
     // }
 
     // POST
@@ -36,21 +36,21 @@ public class GenreServiceImpl implements GenreService {
     // GET (ONE)
     // @Override
     // public Genre getGenre(Long genreid) {
-    //     Optional<Genre> optionalGenre = genreRepository.findById(genreid);
-    //     if (optionalGenre.isPresent()) {
-    //         Genre foundGenre = optionalGenre.get();
-    //         return foundGenre;
-    //     }
-    //     throw new GenreNotFoundException(genreid);
+    // Optional<Genre> optionalGenre = genreRepository.findById(genreid);
+    // if (optionalGenre.isPresent()) {
+    // Genre foundGenre = optionalGenre.get();
+    // return foundGenre;
+    // }
+    // throw new GenreNotFoundException(genreid);
     // }
     // @Override
     // public Genre getGenre(Long genreid) {
-    //     Genre foundGenre = genreRepository.findById(genreid).get();
-    //     return foundGenre;
+    // Genre foundGenre = genreRepository.findById(genreid).get();
+    // return foundGenre;
     // }
     @Override
     public Genre getGenre(Long genreid) {
-        return genreRepository.findById(genreid).orElseThrow(()-> new GenreNotFoundException(genreid));
+        return genreRepository.findById(genreid).orElseThrow(() -> new GenreNotFoundException(genreid));
     }
 
     // GET (ALL)
@@ -64,7 +64,7 @@ public class GenreServiceImpl implements GenreService {
     @Override
     public Genre updateGenre(Long genreid, Genre genre) {
         // retrieve the genre from the database
-        Genre genreToUpdate = genreRepository.findById(genreid).orElseThrow(()-> new GenreNotFoundException(genreid));
+        Genre genreToUpdate = genreRepository.findById(genreid).orElseThrow(() -> new GenreNotFoundException(genreid));
         // update the genre retrieved from the database
         genreToUpdate.setGenreid(genre.getGenreid());
         genreToUpdate.setGenreName(genre.getGenreName());
