@@ -56,5 +56,6 @@ public class Movie {
         this.movieTitle = movieTitle;
         this.movieYear = movieYear;
         this.movieDescription = movieDescription;
+        // this.genre = genre;
     }
 }
