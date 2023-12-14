@@ -106,20 +106,20 @@ public class UserController {
     }
 
     @PostMapping("/{userid}/movies/{movieid}")
-    public ResponseEntity<UserMovie> addUserMovie(@PathVariable Long userid, Long movieid) {
+    public ResponseEntity<UserMovie> addUserMovie(@PathVariable Long userid, @PathVariable Long movieid) {
         UserMovie newUserMovie = userService.addUserMovie(userid, movieid);
         return new ResponseEntity<>(newUserMovie, HttpStatus.CREATED);
     }
 
     // DOES NOT WORK
     @GetMapping("/{userid}/movies/{movieid}")
-    public ResponseEntity<UserMovie> getUserMovie(@PathVariable Long userid, Long movieid) {
+    public ResponseEntity<UserMovie> getUserMovie(@PathVariable Long userid, @PathVariable Long movieid) {
         UserMovie foundUserMovie = userService.getUserMovie(userid, movieid);
         return new ResponseEntity<>(foundUserMovie, HttpStatus.OK);
     }
 
     @DeleteMapping("/{userid}/movies/{movieid}")
-    public ResponseEntity<UserMovie> deleteUserMovie(@PathVariable Long userid, Long movieid) {
+    public ResponseEntity<UserMovie> deleteUserMovie(@PathVariable Long userid, @PathVariable Long movieid) {
         userService.deleteUserMovie(userid, movieid);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

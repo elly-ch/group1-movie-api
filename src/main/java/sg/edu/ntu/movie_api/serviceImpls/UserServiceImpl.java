@@ -38,8 +38,10 @@ public class UserServiceImpl implements UserService {
     // private MovieRatingRepository movieRatingRepository;
 
     // @Autowired
-    public UserServiceImpl(UserRepository userRepository, UserMovieRepository userMovieRepository) {
+    public UserServiceImpl(UserRepository userRepository, UserMovieRepository userMovieRepository,
+            MovieRepository movieRepository) {
         this.userRepository = userRepository;
+        this.movieRepository = movieRepository;
         this.userMovieRepository = userMovieRepository;
     }
 
@@ -125,8 +127,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserMovie getUserMovie(Long userid, Long movieid) {
         // check if user and movie exist
-        userRepository.findById(userid).orElseThrow(() -> new UserNotFoundException(userid));
-        movieRepository.findById(movieid).orElseThrow(() -> new MovieNotFoundException(movieid));
+        User user = userRepository.findById(userid).orElseThrow(() -> new UserNotFoundException(userid));
+        Movie movie = movieRepository.findById(movieid).orElseThrow(() -> new MovieNotFoundException(movieid));
 
         // check if user saved the movie
         // check if there is already an existing record
