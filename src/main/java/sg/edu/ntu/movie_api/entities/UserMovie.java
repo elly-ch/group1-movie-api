@@ -32,13 +32,13 @@ public class UserMovie {
     private Long userid;
     private Long movieid;
 
-    @JsonBackReference
+    @JsonBackReference("user-usermovie")
     @ManyToOne(optional = false)
     @MapsId("userid")
     @JoinColumn(name = "userid", insertable = false, updatable = false)
     private User user;
 
-    @JsonBackReference
+    @JsonBackReference("movie-usermovie")
     @ManyToOne(optional = false)
     @JoinColumn(name = "movieid", insertable = false, updatable = false)
     private Movie movie;

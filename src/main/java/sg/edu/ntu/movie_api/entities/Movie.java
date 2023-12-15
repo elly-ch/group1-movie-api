@@ -15,6 +15,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -49,9 +51,11 @@ public class Movie {
     private Genre genre;
 
     @OneToMany(mappedBy = "movie")
+    @JsonManagedReference("movie-movierating")
     private List<MovieRating> ratings;
 
     @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL)
+    @JsonManagedReference("movie-usermovie")
     private List<UserMovie> userMovies;
 
     public Movie() {
