@@ -29,7 +29,7 @@ public class UserControllerTest {
     @DisplayName("Get user by userid")
     @Test
     public void getUserByUserIdTest() throws Exception {
-        // Step 1: Build a GET request to /customers/1
+        // Step 1: Build a GET request to /users/1
         RequestBuilder request = MockMvcRequestBuilders.get("/users/1");
 
         // Step 2: Perform the request, get the respinse and assert
@@ -38,24 +38,24 @@ public class UserControllerTest {
             .andExpect(status().isOk())
             // Assert that the content type is JSON
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-            // Assert that the id returned is 1
-            .andExpect(jsonPath("$.id").value(1));
+            // Assert that the userid returned is 1
+            .andExpect(jsonPath("$.userid").value(1));
     }
 
-    // @DisplayName("Get all users")
-    // @Test
-    // public void getAllCustomersTest() throws Exception {
-    //     // Step 1: SETUP
-    //     RequestBuilder request = MockMvcRequestBuilders.get("/customers");
+    @DisplayName("Get all users")
+    @Test
+    public void getAllUsersTest() throws Exception {
+        // Step 1: SETUP
+        RequestBuilder request = MockMvcRequestBuilders.get("/users");
 
-    //     // Step 2 & 3: EXECUTE and ASSERT
-    //     mockMvc.perform(request)
-    //             .andExpect(status().isOk())
-    //             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-    //             // one thing to note, for Integration test, is end-to-end, so it actually writes into the database
-    //             // the value here 3 reflects the actual results return from the database, so you may have to modify your DataLoader.java to make sure it has 3 records inside your database.
-    //             .andExpect(jsonPath("$.size()").value(3));
-    // }
+        // Step 2 & 3: EXECUTE and ASSERT
+        mockMvc.perform(request)
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                // one thing to note, for Integration test, is end-to-end, so it actually writes into the database
+                // the value here 3 reflects the actual results return from the database, so you may have to modify your DataLoader.java to make sure it has 3 records inside your database.
+                .andExpect(jsonPath("$.size()").value(3));
+    }
 
     // @Test
     // public void validCustomerCreationTest() throws Exception {
