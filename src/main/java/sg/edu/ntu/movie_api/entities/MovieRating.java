@@ -10,6 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -44,7 +46,10 @@ public class MovieRating {
     @JoinColumn(name = "movieid", insertable = false, updatable = false)
     private Movie movie;
 
-    private int rating;
+    @Min(value = 0, message = "Rating value must be greater than or equal to 0")
+    @Max(value = 5, message = "Rating value must be less than or equal to 5")
+    @Column(name = "rating")
+    private Integer rating;
 
     public MovieRating() {
     }

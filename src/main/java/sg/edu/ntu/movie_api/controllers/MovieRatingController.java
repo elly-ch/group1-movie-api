@@ -3,6 +3,8 @@ package sg.edu.ntu.movie_api.controllers;
 import java.util.ArrayList;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -73,7 +75,7 @@ public class MovieRatingController {
     public ResponseEntity<MovieRating> updateMovieRating(
             @PathVariable Long userid,
             @PathVariable Long movieid,
-            @RequestBody Integer newRating) {
+            @Valid @RequestBody Integer newRating) {
         // Fetch the existing movie rating record, assuming it's stored in a database
         Optional<MovieRating> existingRatingOptional = repo.findByUseridAndMovieid(userid, movieid);
     
