@@ -51,6 +51,9 @@ public class Movie {
     @OneToMany(mappedBy = "movie")
     private List<MovieRating> ratings;
 
+    @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL)
+    private List<UserMovie> userMovies;
+
     public Movie() {
     }
 

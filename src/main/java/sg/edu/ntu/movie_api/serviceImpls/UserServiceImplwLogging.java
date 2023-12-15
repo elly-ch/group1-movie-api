@@ -158,7 +158,7 @@ public class UserServiceImplwLogging implements UserService {
         List<UserMovie> searchUserMovies = userMovieRepository.findByUserid(userid);
         if (searchUserMovies.isEmpty()) {
             // if user didn't save the movie, nothing to delete & throw exception
-            throw new UserMoviesNotFoundException(userid);
+            throw new UserMoviesNotFoundException();
         }
         return (ArrayList<UserMovie>) searchUserMovies;
     }

@@ -4,6 +4,7 @@ package sg.edu.ntu.movie_api.services;
 import java.util.ArrayList;
 
 import sg.edu.ntu.movie_api.entities.Movie;
+import sg.edu.ntu.movie_api.entities.UserMovie;
 
 public interface MovieService {
 
@@ -21,5 +22,23 @@ public interface MovieService {
     // Genre addInteractiontoGenre(Long movieId, Genre interaction);
 
     ArrayList<Movie> searchMovies(String movieTitle);
-    
+
+    /*
+     * FOR `USERMOVIE` ENDPOINTS:
+     * <url> /users/userid/movies
+     * <url> /users/userid/movies/movieid
+     * 
+     * Author: Georgiana
+     */
+
+    // code below
+
+    UserMovie addUserMovie(Long userid, Long movieid); // POST: <url> /movies/{movieid}/users/{userid}
+
+    UserMovie getUserMovie(Long userid, Long movieid); // GET: <url> /movies/{movieid}/users/{userid}
+
+    void deleteUserMovie(Long userid, Long movieid); // DELETE: <url> /movies/{movieid}/users/{userid}
+
+    ArrayList<UserMovie> getAllUserMovies(Long movieid); // GET: <url> /movies/{movieid}/users/
+
 }

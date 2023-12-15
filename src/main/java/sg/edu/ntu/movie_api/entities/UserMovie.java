@@ -1,6 +1,8 @@
 package sg.edu.ntu.movie_api.entities;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
@@ -21,13 +23,13 @@ import lombok.Setter;
 @Builder
 @AllArgsConstructor
 @Table(name = "usermovie")
-@IdClass(UserMovieId.class)
 public class UserMovie {
 
     @Id
-    private Long userid;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long userMovieid;
 
-    @Id
+    private Long userid;
     private Long movieid;
 
     @JsonBackReference

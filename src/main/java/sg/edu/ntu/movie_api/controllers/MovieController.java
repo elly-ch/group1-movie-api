@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import sg.edu.ntu.movie_api.entities.Movie;
+import sg.edu.ntu.movie_api.entities.UserMovie;
 import sg.edu.ntu.movie_api.services.MovieService;
 
 @RestController
@@ -77,4 +78,40 @@ public class MovieController {
     // interaction);
     // return new ResponseEntity<>(newInteraction, HttpStatus.CREATED);
     // }
+
+    /*
+     * FOR `USERMOVIE` ENDPOINTS:
+     * <url> /users/userid/movies
+     * <url> /users/userid/movies/movieid
+     * 
+     * Author: Georgiana
+     */
+
+    // code below
+    @GetMapping("/{movieid}/users")
+    public ResponseEntity<ArrayList<UserMovie>> getAllUserMovies(@PathVariable Long movieid) {
+        ArrayList<UserMovie> foundUserMovies = movieService.getAllUserMovies(movieid);
+        return new ResponseEntity<>(foundUserMovies, HttpStatus.OK);
+    }
+
+    @PostMapping("/{movieid}/users/{userid}")
+    public ResponseEntity<UserMovie> addUserMovie(@PathVariable Long userid,
+            @PathVariable Long movieid) {
+        UserMovie newUserMovie = movieService.addUserMovie(userid, movieid);
+        return new ResponseEntity<>(newUserMovie, HttpStatus.CREATED);
+    }
+
+    @GetMapping("/{movieid}/users/{userid}")
+    public ResponseEntity<UserMovie> getUserMovie(@PathVariable Long userid,
+            @PathVariable Long movieid) {
+        UserMovie foundUserMovie = movieService.getUserMovie(userid, movieid);
+        return new ResponseEntity<>(foundUserMovie, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{movieid}/users/{userid}")
+    public ResponseEntity<UserMovie> deleteUserMovie(@PathVariable Long userid,
+            @PathVariable Long movieid) {
+        movieService.deleteUserMovie(userid, movieid);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 }

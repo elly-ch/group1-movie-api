@@ -111,7 +111,6 @@ public class UserController {
         return new ResponseEntity<>(newUserMovie, HttpStatus.CREATED);
     }
 
-    // DOES NOT WORK
     @GetMapping("/{userid}/movies/{movieid}")
     public ResponseEntity<UserMovie> getUserMovie(@PathVariable Long userid, @PathVariable Long movieid) {
         UserMovie foundUserMovie = userService.getUserMovie(userid, movieid);

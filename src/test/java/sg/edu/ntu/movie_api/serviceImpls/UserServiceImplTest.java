@@ -30,11 +30,14 @@ import sg.edu.ntu.movie_api.repositories.UserRepository;
 @SpringBootTest
 public class UserServiceImplTest {
 
-    // @Mock
-    // private UserRepository userRepository;
+    @Mock
+    private UserRepository userRepository;
 
-    // @InjectMocks
-    // UserServiceImpl userService;
+    @Mock
+    private UserMovieRepository userMovieRepository;
+
+    @InjectMocks
+    UserServiceImplwLogging userService;
 
     // @Test
     // public void createUserTest() {
@@ -90,18 +93,9 @@ public class UserServiceImplTest {
     // customerService.getCustomer(customerId));
     // }
 
-    @Autowired
-    private UserRepository userRepository;
+    // =================================USER-MOVIE=================================
 
-    @Autowired
-    private MovieRepository movieRepository;
-
-    @MockBean
-    private UserMovieRepository userMovieRepository; // Mocked bean
-
-    @Autowired
-    private UserServiceImplwLogging userService;
-
+    // test below does not work :')
     @Test
     public void createUserMovieTest() throws Exception {
         UserMovie userMovie = UserMovie.builder().userid(1L).movieid(1L).build();
