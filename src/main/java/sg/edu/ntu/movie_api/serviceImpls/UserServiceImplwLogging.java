@@ -50,30 +50,40 @@ public class UserServiceImplwLogging implements UserService {
 
     @Override
     public ArrayList<User> searchUsersByEmail(String email) {
+        logger.info("⚪️ UserServiceImplwLogging.searchUsersByEmail() called");
+
         List<User> foundUsers = userRepository.findByEmail(email);
         return (ArrayList<User>) foundUsers;
     }
 
     // @Override
     public User createUser(User user) {
+        logger.info("⚪️ UserServiceImplwLogging.createUser() called");
+
         User newUser = userRepository.save(user);
         return newUser;
     }
 
     @Override
     public User getUser(Long userid) {
+        logger.info("⚪️ UserServiceImplwLogging.getUser() called");
+
         // Note to self: findById (from JPA) takes in the primary key
         return userRepository.findById(userid).orElseThrow(() -> new UserNotFoundException(userid));
     }
 
     @Override
     public ArrayList<User> getAllUsers() {
+        logger.info("⚪️ UserServiceImplwLogging.getAllUsers() called");
+
         List<User> allUsers = userRepository.findAll();
         return (ArrayList<User>) allUsers;
     }
 
     @Override
     public User updateUser(Long userid, User user) {
+        logger.info("⚪️ UserServiceImplwLogging.updateUser() called");
+
         // retrieve the customer from the database
         User userToUpdate = userRepository.findById(userid).orElseThrow(() -> new UserNotFoundException(userid));
 
@@ -88,6 +98,8 @@ public class UserServiceImplwLogging implements UserService {
 
     @Override
     public void deleteUser(Long userid) {
+        logger.info("⚪️ UserServiceImplwLogging.deleteUser() called");
+
         userRepository.deleteById(userid); // deleteById takes in the primary key
     }
 
@@ -130,11 +142,11 @@ public class UserServiceImplwLogging implements UserService {
     // code below
     @Override
     public UserMovie getUserMovie(Long userid, Long movieid) {
-        logger.info("UserServiceImplwLogging.getUserMovie() called");
+        logger.info("⚪️ UserServiceImplwLogging.getUserMovie() called");
 
         // check if user and movie exist
-        User user = userRepository.findById(userid).orElseThrow(() -> new UserNotFoundException(userid));
-        Movie movie = movieRepository.findById(movieid).orElseThrow(() -> new MovieNotFoundException(movieid));
+        userRepository.findById(userid).orElseThrow(() -> new UserNotFoundException(userid));
+        movieRepository.findById(movieid).orElseThrow(() -> new MovieNotFoundException(movieid));
 
         // check if user saved the movie
         // check if there is already an existing record
@@ -150,7 +162,7 @@ public class UserServiceImplwLogging implements UserService {
 
     @Override
     public ArrayList<UserMovie> getAllUserMovies(Long userid) {
-        logger.info("UserServiceImplwLogging.getAllUserMovies() called");
+        logger.info("⚪️ UserServiceImplwLogging.getAllUserMovies() called");
 
         // check if user exists
         userRepository.findById(userid).orElseThrow(() -> new UserNotFoundException(userid));
@@ -165,7 +177,7 @@ public class UserServiceImplwLogging implements UserService {
 
     @Override
     public UserMovie addUserMovie(Long userid, Long movieid) {
-        logger.info("UserServiceImplwLogging.addUserMovie() called");
+        logger.info("⚪️ UserServiceImplwLogging.addUserMovie() called");
 
         // TODO: DEBUG
         // retrieve the user and movie from the database
@@ -186,7 +198,7 @@ public class UserServiceImplwLogging implements UserService {
 
     @Override
     public void deleteUserMovie(Long userid, Long movieid) {
-        logger.info("UserServiceImplwLogging.deleteUserMovie() called");
+        logger.info("⚪️ UserServiceImplwLogging.deleteUserMovie() called");
 
         // check if user and movie exist
         userRepository.findById(userid).orElseThrow(() -> new UserNotFoundException(userid));

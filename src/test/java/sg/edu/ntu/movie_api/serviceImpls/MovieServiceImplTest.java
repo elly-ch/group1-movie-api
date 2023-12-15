@@ -25,7 +25,7 @@ public class MovieServiceImplTest {
     private MovieRepository movieRepository;
 
     @InjectMocks
-    MovieServiceImpl movieService;
+    MovieServiceImplwLogging movieService;
 
     @Test
     public void createMovieTest() {
