@@ -26,13 +26,13 @@ import sg.edu.ntu.movie_api.services.UserService;
 @RequestMapping("/users")
 public class UserController {
 
-    /*
+    /*******************************************************************
      * FOR `USERS` ENDPOINTS:
      * <url> /users
      * <url> /users/userid
      * 
      * Author: Elly
-     */
+     ******************************************************************/
     private UserService userService;
 
     // @Autowired
@@ -90,13 +90,13 @@ public class UserController {
     // return new ResponseEntity<>(newInteraction, HttpStatus.CREATED);
     // }
 
-    /*
+    /*******************************************************************
      * FOR `USERMOVIE` ENDPOINTS:
      * <url> /users/userid/movies
      * <url> /users/userid/movies/movieid
      * 
      * Author: Georgiana
-     */
+     ******************************************************************/
 
     // code below
     @GetMapping("/{userid}/movies")
