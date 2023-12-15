@@ -26,8 +26,6 @@ public interface UserService {
 
     void deleteUser(Long userid);
 
-    UserMovie addUserMovieToUser(Long userid, UserMovie userMovie);
-
     // MovieRating addMovieRatingToUser(Long userid, MovieRating movieRating);
 
     ArrayList<User> searchUsersByEmail(String userid);

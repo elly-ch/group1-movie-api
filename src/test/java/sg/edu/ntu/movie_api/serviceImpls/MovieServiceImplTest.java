@@ -14,46 +14,52 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import sg.edu.ntu.movie_api.entities.Movie;
+import sg.edu.ntu.movie_api.exceptions.MovieNotFoundException;
+import sg.edu.ntu.movie_api.repositories.MovieRepository;
+
 @SpringBootTest
 public class MovieServiceImplTest {
 
-    // @Mock
-    // private MovieRepository movieRepository;
+    @Mock
+    private MovieRepository movieRepository;
 
-    // @InjectMocks
-    // MovieServiceImpl movieService;
+    @InjectMocks
+    MovieServiceImpl movieService;
 
-    // @Test
-    // public void createMovieTest() {
-    //     Movie movie = Movie.builder().movieTitle("Test Movie").movieYear(1234).movieDescription("A test movie description").build();
+    @Test
+    public void createMovieTest() {
+        Movie movie = Movie.builder().movieTitle("Test Movie").movieYear(1234)
+                .movieDescription("A test movie description").build();
 
-    //     when((movieRepository.save(movie))).thenReturn(movie);
+        when((movieRepository.save(movie))).thenReturn(movie);
 
-    //     Movie savedMovie = movieService.createMovie(movie);
+        Movie savedMovie = movieService.createMovie(movie);
 
-    //     assertEquals(movie, savedMovie, "The saved movie is to be same as the new movie");
+        assertEquals(movie, savedMovie, "The saved movie is to be same as the new movie");
 
-    //     verify(movieRepository, times(1)).save(movie);
-    // }
+        verify(movieRepository, times(1)).save(movie);
+    }
 
-    // @Test
-    // public void getMovieTest() {
-    //     Movie movie = Movie.builder().movieTitle("Test Movie").movieYear(1234).movieDescription("A test movie description").build();
+    @Test
+    public void getMovieTest() {
+        Movie movie = Movie.builder().movieTitle("Test Movie").movieYear(1234)
+                .movieDescription("A test movie description").build();
 
-    //     Long movieId = 1L;
+        Long movieId = 1L;
 
-    //     when(movieRepository.findById(movieId)).thenReturn(Optional.of(movie));
+        when(movieRepository.findById(movieId)).thenReturn(Optional.of(movie));
 
-    //     Movie retrievedMovie = movieService.getMovie(movieId);
+        Movie retrievedMovie = movieService.getMovie(movieId);
 
-    //     assertEquals(movie, retrievedMovie);
-    // }
-    
-    // @Test
-    // void testGetMovieNotFound() {
-    //     Long movieId = 1L;
-    //     when(movieRepository.findById(movieId)).thenReturn(Optional.empty());
+        assertEquals(movie, retrievedMovie);
+    }
 
-    //     assertThrows(MovieNotFoundException.class, () -> movieService.getMovie(movieId));
-    // }
+    @Test
+    void testGetMovieNotFound() {
+        Long movieId = 1L;
+        when(movieRepository.findById(movieId)).thenReturn(Optional.empty());
+
+        assertThrows(MovieNotFoundException.class, () -> movieService.getMovie(movieId));
+    }
 }

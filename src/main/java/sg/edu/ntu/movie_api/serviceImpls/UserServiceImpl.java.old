@@ -88,17 +88,18 @@ public class UserServiceImpl implements UserService {
         userRepository.deleteById(userid); // deleteById takes in the primary key
     }
 
-    @Override
-    public UserMovie addUserMovieToUser(Long userid, UserMovie userMovie) {
-        // TODO: DEBUG
-        // retrieve the user from the database
-        User selectedUser = userRepository.findById(userid).orElseThrow(() -> new UserNotFoundException(userid));
+    // @Override
+    // public UserMovie addUserMovieToUser(Long userid, UserMovie userMovie) {
+    // // TODO: DEBUG
+    // // retrieve the user from the database
+    // User selectedUser = userRepository.findById(userid).orElseThrow(() -> new
+    // UserNotFoundException(userid));
 
-        // add the customer to the interaction
-        userMovie.setUser(selectedUser);
-        // save the interaction to the database
-        return userMovieRepository.save(userMovie);
-    }
+    // // add the customer to the interaction
+    // userMovie.setUser(selectedUser);
+    // // save the interaction to the database
+    // return userMovieRepository.save(userMovie);
+    // }
 
     // @Override
     // public MovieRating addMovieRatingToUser(Long userid, MovieRating movieRating)

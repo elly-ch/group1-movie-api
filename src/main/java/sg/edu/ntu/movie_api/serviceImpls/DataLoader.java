@@ -39,7 +39,8 @@ public class DataLoader {
 
     @Autowired
     public DataLoader(UserRepository userRepository, UserMovieRepository userMovieRepository,
-            MovieRepository movieRepository, GenreRepository genreRepository, MovieRatingRepository movieRatingRepository) {
+            MovieRepository movieRepository, GenreRepository genreRepository,
+            MovieRatingRepository movieRatingRepository) {
         this.userRepository = userRepository;
         this.userMovieRepository = userMovieRepository;
         this.movieRepository = movieRepository;
@@ -71,7 +72,7 @@ public class DataLoader {
         userMovieRepository.save(new UserMovie(1L, 1L));
         userMovieRepository.save(new UserMovie(1L, 2L));
         userMovieRepository.save(new UserMovie(2L, 2L));
-        userMovieRepository.save(new UserMovie(2L, 1L));
+        userMovieRepository.save(new UserMovie(3L, 1L));
 
         movieRatingRepository.save(new MovieRating(1L, 1L, 5));
         movieRatingRepository.save(new MovieRating(1L, 2L, 3));
