@@ -50,7 +50,7 @@ public class Movie {
     @JoinColumn(name = "genre_id")
     private Genre genre;
 
-    @OneToMany(mappedBy = "movie")
+    @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL)
     @JsonManagedReference("movie-movierating")
     private List<MovieRating> ratings;
 

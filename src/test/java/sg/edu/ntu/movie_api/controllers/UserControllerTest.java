@@ -12,6 +12,8 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import sg.edu.ntu.movie_api.entities.User;
+
 //import sg.edu.ntu.simplecrm.entities.Customer;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -91,41 +93,41 @@ public class UserControllerTest {
                 .andExpect(jsonPath("$.movieid").value(1));
     }
 
-    // @Test
-    // public void validCustomerCreationTest() throws Exception {
-    // Customer customer =
-    // Customer.builder().firstName("Clint").lastName("Barton").email("clint@avengers.com")
-    // .contactNo("12345678").jobTitle("Special Agent").yearOfBirth(1975).build();
+    @Test
+    public void validUserCreationTest() throws Exception {
+    User user =
+    User.builder().userid(4L).email("user4@gmail.com")
+                .password("password4").name("name4").build();
 
-    // String newCustomerAsJSON = objectMapper.writeValueAsString(customer);
+    String newUserAsJSON = objectMapper.writeValueAsString(user);
 
-    // RequestBuilder request =
-    // MockMvcRequestBuilders.post("/customers").contentType(MediaType.APPLICATION_JSON)
-    // .content(newCustomerAsJSON);
+    RequestBuilder request =
+    MockMvcRequestBuilders.post("/users").contentType(MediaType.APPLICATION_JSON)
+    .content(newUserAsJSON);
 
-    // mockMvc.perform(request)
-    // .andExpect(status().isCreated())
-    // .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-    // .andExpect(jsonPath("$.id").value(4))
-    // .andExpect(jsonPath("$.firstName").value("Clint"))
-    // .andExpect(jsonPath("$.lastName").value("Barton"));
-    // }
+    mockMvc.perform(request)
+    .andExpect(status().isCreated())
+    .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+    .andExpect(jsonPath("$.userid").value(4))
+    .andExpect(jsonPath("$.email").value("user4@gmail.com"))
+    .andExpect(jsonPath("$.password").value("password4"))
+    .andExpect(jsonPath("$.name").value("name4"));
+    }
 
-    // @Test
-    // public void invalidCustomerCreationTest() throws Exception {
+    @Test
+    public void invalidUserCreationTest() throws Exception {
 
-    // Customer invalidCustomer = new Customer(3L, " ", " ", "bruce@a.com",
-    // "12345678", "Manager", 1990, null);
+    User invalidUser = new User(5L, "invalidemail", "password5", "name5");
 
-    // String invalidCustomerAsJSON =
-    // objectMapper.writeValueAsString(invalidCustomer);
+    String invalidUserAsJSON =
+    objectMapper.writeValueAsString(invalidUser);
 
-    // RequestBuilder request = MockMvcRequestBuilders.post("/customers")
-    // .contentType(MediaType.APPLICATION_JSON)
-    // .content(invalidCustomerAsJSON);
+    RequestBuilder request = MockMvcRequestBuilders.post("/users")
+    .contentType(MediaType.APPLICATION_JSON)
+    .content(invalidUserAsJSON);
 
-    // mockMvc.perform(request)
-    // .andExpect(status().isBadRequest())
-    // .andExpect(content().contentType(MediaType.APPLICATION_JSON));
-    // }
+    mockMvc.perform(request)
+    .andExpect(status().isBadRequest())
+    .andExpect(content().contentType(MediaType.APPLICATION_JSON));
+    }
 }
