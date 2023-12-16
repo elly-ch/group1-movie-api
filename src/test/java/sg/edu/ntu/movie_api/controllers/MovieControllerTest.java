@@ -34,7 +34,7 @@ public class MovieControllerTest {
         mockMvc.perform(request)
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.movieId").value(1));
+                .andExpect(jsonPath("$.movieid").value(1));
     }
 
     @DisplayName("Get all movies")
@@ -60,7 +60,7 @@ public class MovieControllerTest {
         mockMvc.perform(request)
                 .andExpect(status().isCreated())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.movieId").value(3))
+                .andExpect(jsonPath("$.movieid").value(3))
                 .andExpect(jsonPath("$.movieTitle").value("Test Movie"))
                 .andExpect(jsonPath("$.movieYear").value(1234))
                 .andExpect(jsonPath("$.movieDescription").value("A Test Movie"));
